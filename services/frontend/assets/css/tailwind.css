@@ -1,0 +1,15 @@
+:root {
+  --bg-main: #A4BABF;
+  --bg-secondary: #0D0D0D;
+  --bg-contrast: #54778C;
+  --bg-accent: #437373;
+  --bg-bluh: #565AA6;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: Tahoma, sans-serif;
+}

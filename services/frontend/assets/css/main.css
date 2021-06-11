@@ -1,0 +1,76 @@
+:root {
+  --bg-main: #A4BABF;
+  --bg-secondary: #0D0D0D;
+  --bg-contrast: #54778C;
+  --accent: #437373;
+  --bluh: #565AA6;
+}
+
+body {
+  background-color: var(--bg-main) !important;
+  font-family: Tahoma, sans-serif!important;
+  overflow-x: hidden;
+  color: white;
+}
+
+.container_custom {
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  display: block;
+  font-weight: 300;
+  font-size: 100px;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  font-weight: 200;
+  font-size: 42px;
+  word-spacing: 5px;
+  padding-bottom: 15px;
+}
+
+.links {
+  padding-top: 15px;
+}
+
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid var(--bg-contrast);
+  color: var(--bg-contrast);
+  text-decoration: none;
+  padding: 10px 30px;
+}
+
+.button:hover {
+  color: #fff;
+  background-color: var(--bg-contrast);
+}
+
+.button--green {
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+  padding: 10px 30px;
+  margin-left: 15px;
+}
+
+.button--green:hover {
+  color: #fff;
+  background-color: var(--accent);
+}
+
+.main-text{
+  color: var(--bg-main)
+}
+
+
