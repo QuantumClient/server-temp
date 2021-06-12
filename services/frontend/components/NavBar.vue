@@ -40,7 +40,7 @@
             <nuxt-link :to="{path: '/', hash: 'projects'}" v-scroll-to="{el: '#projects'}">Projects</nuxt-link>
           </li>
           <li class="hover:border-bluh border-accent border-b-2">
-          <a href="https://github.com/quantumclient">GitHub</a>
+            <nuxt-link to="/github"> GitHub </nuxt-link>
           </li>
           <li v-if="$auth.loggedIn" class="hover:border-bluh border-accent border-b-2">
             <nuxt-link to="/dashboard/"> Profile </nuxt-link>

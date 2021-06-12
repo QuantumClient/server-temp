@@ -6,21 +6,6 @@ import (
 	"net/http"
 )
 
-func apiResponse(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-
-	switch r.Method {
-
-	case "GET":
-
-
-	
-	}
-	w.WriteHeader(http.StatusOK)
-	w.Header().Set("Content-Type", "application/json")
-	w.Write([]byte(`{"message":"hello world!"}`))
-}
-
 func GetRouter() *mux.Router {
 	var r = mux.NewRouter()
 	r.StrictSlash(true)
@@ -34,7 +19,7 @@ func GetRouter() *mux.Router {
 	r.HandleFunc("/api/v1/projects", handlers.GetProjects).Methods("GET")
 	r.HandleFunc("/api/v1/projects/{project}", handlers.UpdateProjectVersion).Methods("PUT")
 	r.HandleFunc("/api/v1/projects/{project}", handlers.GetProject).Methods("GET")
-	r.HandleFunc("/api/v1/projects/{project}/link", handlers.UpdateProjectLink).Methods("Put")
+	r.HandleFunc("/api/v1/projects/{project}/link", handlers.UpdateProjectLink).Methods("PUT")
 
 	r.HandleFunc("/api/v1/auth/login", handlers.Login).Methods("PUT")
 	r.HandleFunc("/api/v1/auth/register", handlers.Signup).Methods("PUT")

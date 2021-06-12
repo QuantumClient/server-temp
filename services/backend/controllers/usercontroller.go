@@ -69,7 +69,7 @@ func Signup(user *models.User) (string, error) {
 	if err != nil {
 		log.Println(err)
 	}
-	_, err = st.Exec(user.Uuid, user.Username)
+	_, err = st.Exec(user.Uuid)
 
 	if err != nil {
 		log.Println(err)

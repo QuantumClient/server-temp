@@ -8,22 +8,12 @@
         Modern utility mods
       </h2>
       <div class="links">
-        <a
-          href="https://github.com/quantumclient"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button"
-        >
+        <NuxtLink to="/discord" class="button">
           Discord
-        </a>
-        <a
-          href="https://github.com/quantumclient"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button"
-        >
-          GitHub
-        </a>
+        </NuxtLink>
+        <NuxtLink to="/github" class="button">
+          Github
+        </NuxtLink>
         <NuxtLink to="/projects/qubit" class="button">
           Download
         </NuxtLink>
