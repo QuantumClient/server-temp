@@ -33,16 +33,6 @@
                 </defs>
               </svg>
             </a>
-            <div id="popoverEth" v-bind:class="{'hidden': !ethiusPop, 'block': ethiusPop}" class="bg-contrast rounded-2xl shadow-md mb-3 block z-50 font-normal text-center text-sm max-w-xs text-left no-underline break-words">
-              <div>
-                <div class="text-white font-semibold p-3 mb-0 border-b border-solid border-colors-cyan-50 uppercase rounded-t-lg">
-                  Discord
-                </div>
-                <div class="text-white p-3">
-                  Ethius#5699
-                </div>
-              </div>
-            </div>
           </div>
         </div>
         <div class="flex flex-col justify-center w-full px-8 mx-6 my-12 text-center rounded-md md:w-96 lg:w-80 xl:w-64 bg-accent text-coolGray-100 shadow-md transform duration-500 hover:-translate-y-1">
@@ -80,18 +70,6 @@
                 </defs>
               </svg>
             </a>
-            <div id="popoverChiq" v-bind:class="{'hidden': !chiqPop, 'block': chiqPop}" class="bg-contrast rounded-2xl shadow-md mb-3 block z-50 font-normal text-center text-sm max-w-xs text-left no-underline break-words">
-              <div>
-                <div class="text-white font-semibold p-3 mb-0 border-b border-solid border-colors-cyan-50 uppercase rounded-t-lg">
-                  Discord
-                </div>
-                <div class="text-white p-3">
-                  ChiquitaV2#3814
-                </div>
-              </div>
-            </div>
-
-
           </div>
         </div>
         <div class="flex flex-col justify-center w-full px-8 mx-6 my-12 text-center rounded-md md:w-96 lg:w-80 xl:w-64 bg-accent text-coolGray-100 shadow-md transform duration-500 hover:-translate-y-1">
@@ -124,18 +102,39 @@
                 </defs>
               </svg>
             </a>
-            <div id="popoverR3" v-bind:class="{'hidden': !r3Pop, 'block': r3Pop}" class="bg-contrast rounded-2xl shadow-md mb-3 block z-50 font-normal text-center text-sm max-w-xs text-left no-underline break-words">
-              <div>
-                <div class="text-white font-semibold p-3 mb-0 border-b border-solid border-colors-cyan-50 uppercase rounded-t-lg">
-                  Discord
-                </div>
-                <div class="text-white p-3">
-                  r333mo#6436
-                </div>
-              </div>
-            </div>
+
           </div>
         </div><!---->
+      </div>
+    </div>
+    <div id="popoverEth" v-bind:class="{'hidden': !ethiusPop, 'block': ethiusPop}" class="bg-contrast rounded-2xl shadow-md mb-3 block z-50 font-normal text-center text-sm max-w-xs text-left no-underline break-words">
+      <div>
+        <div class="text-white font-semibold p-3 mb-0 border-b border-solid border-colors-cyan-50 uppercase rounded-t-lg">
+          Discord
+        </div>
+        <div class="text-white p-3">
+          Ethius#5699
+        </div>
+      </div>
+    </div>
+    <div id="popoverR3" v-bind:class="{'hidden': !r3Pop, 'block': r3Pop}" class="bg-contrast rounded-2xl shadow-md mb-3 block z-50 font-normal text-center text-sm max-w-xs text-left no-underline break-words">
+      <div>
+        <div class="text-white font-semibold p-3 mb-0 border-b border-solid border-colors-cyan-50 uppercase rounded-t-lg">
+          Discord
+        </div>
+        <div class="text-white p-3">
+          r333mo#6436
+        </div>
+      </div>
+    </div>
+    <div id="popoverChiq" v-bind:class="{'hidden': !chiqPop, 'block': chiqPop}" class="bg-contrast rounded-2xl shadow-md mb-3 block z-50 font-normal text-center text-sm max-w-xs text-left no-underline break-words">
+      <div>
+        <div class="text-white font-semibold p-3 mb-0 border-b border-solid border-colors-cyan-50 uppercase rounded-t-lg">
+          Discord
+        </div>
+        <div class="text-white p-3">
+          ChiquitaV2#3814
+        </div>
       </div>
     </div>
   </section>
