@@ -13,7 +13,7 @@ func GetAllAccounts() []models.Permission {
 		perms []models.Permission
 	)
 
-	rows, err := db.Db.Query("SELECT 'uuid', 'admin', 'access', 'createdAt' FROM permissions")
+	rows, err := db.Db.Query("SELECT uuid, admin, access, created_at FROM permissions")
 
 	if err != nil {
 		log.Println(err)
