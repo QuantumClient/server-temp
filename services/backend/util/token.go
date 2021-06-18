@@ -10,7 +10,6 @@ import (
 	"strings"
 )
 
-
 func ValidateJWT(tokenString string) (jwt.MapClaims, error) {
 	signingKey := []byte(os.Getenv("JWT_SECRET"))
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
@@ -39,7 +38,7 @@ func GetAccountsFromToken(c jwt.MapClaims) (*models.User, *models.Permission) {
 	user := &models.User{
 		Uuid:     uuid,
 		Username: c["username"].(string),
-		}
+	}
 
 	perms := models.PermsfromUser(user)
 
@@ -72,4 +71,28 @@ func FullCheck(w http.ResponseWriter, r *http.Request) (bool, *models.Permission
 	return true, perms
 }
 
+func AccessCheck(w http.ResponseWriter, r *http.Request) (bool, *models.Permission) {
+	token := GetJWT(r)
 
+	claims, err := ValidateJWT(token)
+
+	if err != nil {
+		log.Println(err)
+		ErrorResponse(w, r, "Invaild Token")
+		return false, nil
+	}
+
+	if claims.Valid == nil {
+		log.Println(err)
+		ErrorResponse(w, r, "Invaild Token")
+		return false, nil
+	}
+
+	_, perms := GetAccountsFromToken(claims)
+
+	if !perms.Access {
+		ErrorResponse(w, r, "No access")
+		return false, nil
+	}
+	return true, perms
+}

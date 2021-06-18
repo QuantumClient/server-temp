@@ -9,7 +9,7 @@ import (
 
 func GetProjects() []models.Project {
 	var (
-		project models.Project
+		project  models.Project
 		projects []models.Project
 	)
 
@@ -20,7 +20,7 @@ func GetProjects() []models.Project {
 	}
 
 	for rows.Next() {
-		rows.Scan(&project.Name ,&project.Verison, &project.GitHub, &project.Link)
+		rows.Scan(&project.Name, &project.Verison, &project.GitHub, &project.Link)
 		projects = append(projects, project)
 	}
 	defer rows.Close()
@@ -41,7 +41,6 @@ func UpdateProjectVersion(project *models.Project) error {
 
 func GetProject(project *models.Project) ([]byte, error) {
 	res, err := db.Db.Query("SELECT * FROM projects WHERE name=?", project.Name)
-	defer res.Close()
 	if err != nil {
 		log.Println(err)
 	}
@@ -55,6 +54,7 @@ func GetProject(project *models.Project) ([]byte, error) {
 	} else {
 		return nil, nil
 	}
+	defer res.Close()
 
 	return json.Marshal(project)
 

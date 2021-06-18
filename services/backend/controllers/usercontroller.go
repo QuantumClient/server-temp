@@ -15,14 +15,13 @@ func Login(user *models.User) (string, error, uuid.UUID) {
 		return "", util.ErrNoAccount, uuid.Nil
 	}
 
-	if (result.VerifyPassword(user.Password)) {
+	if result.VerifyPassword(user.Password) {
 		return "", util.ErrBadPassword, uuid.Nil
 	}
 
 	token, err := result.GenerateJWT()
 
 	return token, err, result.Uuid
-
 
 }
 
@@ -33,8 +32,9 @@ func GetUserfromName(name string) *models.User {
 	}
 	user := &models.User{}
 	for rows.Next() {
-		rows.Scan(&user.Uuid,&user.Username, &user.Password, &user.CreatedAt, &user.UpdatedAt)
+		rows.Scan(&user.Uuid, &user.Username, &user.Password, &user.CreatedAt, &user.UpdatedAt)
 	}
+	defer rows.Close()
 	return user
 }
 
@@ -45,8 +45,9 @@ func GetUserfromUUID(uuid uuid.UUID) *models.User {
 	}
 	user := &models.User{}
 	if rows.Next() {
-		rows.Scan(&user.Uuid,&user.Username)
+		rows.Scan(&user.Uuid, &user.Username)
 	}
+	defer rows.Close()
 	return user
 }
 
@@ -75,7 +76,8 @@ func Signup(user *models.User) (string, error) {
 		log.Println(err)
 	}
 
-
+	defer stmt.Close()
+	defer st.Close()
 	return user.GenerateJWT()
 
 }

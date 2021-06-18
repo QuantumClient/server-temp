@@ -36,7 +36,6 @@ func GetCapes() ([]byte, error) {
 
 }
 
-
 func DeleteCape(uuid uuid.UUID) ([]byte, error) {
 
 	_, err := db.Db.Exec("DELETE FROM capes WHERE uuid = ?", uuid)
@@ -47,11 +46,9 @@ func DeleteCape(uuid uuid.UUID) ([]byte, error) {
 
 	return json.Marshal(map[string]string{"DELETED": uuid.String()})
 
-
 }
 
 func AddCape(cape *models.Cape) ([]byte, error) {
-
 
 	pre, err := db.Db.Prepare("INSERT INTO capes(uuid, type) VALUES (?, ?)")
 
@@ -66,7 +63,6 @@ func AddCape(cape *models.Cape) ([]byte, error) {
 	}
 
 	return json.Marshal(map[string]string{"ADDED": cape.Uuid.String(), "TYPE": string(cape.CapeType)})
-
 
 }
 
@@ -89,7 +85,6 @@ func GetSingleCape(cape *models.Cape) ([]byte, error) {
 	}
 
 	return json.Marshal(cape)
-
 
 }
 
