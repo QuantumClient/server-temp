@@ -9,18 +9,18 @@ import (
 
 func GetAllAccounts() []models.Permission {
 	var (
-		perm models.Permission
+		perm  models.Permission
 		perms []models.Permission
 	)
 
-	rows, err := db.Db.Query("SELECT * FROM permissions")
+	rows, err := db.Db.Query("SELECT 'uuid', 'admin', 'access', 'createdAt' FROM permissions")
 
 	if err != nil {
 		log.Println(err)
 	}
 
 	for rows.Next() {
-		rows.Scan(&perm.ID, &perm.Admin, &perm.Access, &perm.Hwid, &perm.CreatedAt)
+		rows.Scan(&perm.ID, &perm.Admin, &perm.Access, &perm.CreatedAt)
 		res, err := db.Db.Query("SELECT username FROM users WHERE uuid=?", perm.ID)
 		if err != nil {
 			log.Println(err)
