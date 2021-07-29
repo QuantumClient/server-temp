@@ -199,10 +199,10 @@ router.post('/auth/users/:uuid/access', (req, res) => {
   })();
 });
 
-router.delete('/me/online', (req, res) => {
+router.delete('/mc/online', (req, res) => {
   (async () => {
     try {
-      const api = await instance.delete("me/online", { headers: { authorization: req.headers.authorization } });
+      const api = await instance.delete("mc/online", { headers: { authorization: req.headers.authorization } });
       res.status(api.status).send(api.data)
     } catch (e) {
       res.status(e.response.status).send(e.response.data);
@@ -210,10 +210,10 @@ router.delete('/me/online', (req, res) => {
   })();
 });
 
-router.put('/me/online', (req, res) => {
+router.put('/mc/online', (req, res) => {
   (async () => {
     try {
-      const api = await instance.put("me/online", req.body, { headers: { authorization: req.headers.authorization } });
+      const api = await instance.put("mc/online", req.body, { headers: { authorization: req.headers.authorization } });
       res.status(api.status).send(api.data)
     } catch (e) {
       res.status(e.response.status).send(e.response.data);
@@ -221,10 +221,10 @@ router.put('/me/online', (req, res) => {
   })();
 });
 
-router.get('/me/online', (req, res) => {
+router.get('/mc/online', (req, res) => {
   (async () => {
     try {
-      const api = await instance.get("me/online");
+      const api = await instance.get("mc/online");
       res.status(api.status).send(api.data)
     } catch (e) {
       res.status(e.response.status).send(e.response.data);
