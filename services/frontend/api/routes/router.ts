@@ -202,7 +202,7 @@ router.post('/auth/users/:uuid/access', (req, res) => {
 router.delete('/mc/online', (req, res) => {
   (async () => {
     try {
-      const api = await instance.delete("mc/online", { headers: { authorization: req.headers.authorization } });
+      const api = await instance.post("mc/online", req.body,  { headers: { authorization: req.headers.authorization } });
       res.status(api.status).send(api.data)
     } catch (e) {
       res.status(e.response.status).send(e.response.data);
