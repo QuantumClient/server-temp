@@ -32,8 +32,9 @@ func GetRouter() *mux.Router {
 	r.HandleFunc("/api/v1/auth/token", handlers.CheckToken).Methods("GET")
 	r.HandleFunc("/api/v1/auth/me", handlers.Me).Methods("GET")
 
+	r.HandleFunc("/api/v1/mc/online", handlers.GetOnline).Methods("GET")
+	r.HandleFunc("/api/v1/mc/online", handlers.AddToOnline).Methods("PUT")
+	r.HandleFunc("/api/v1/mc/online", handlers.RemoveFromOnline).Methods("DELETE")
 
 	return r
 }
-
-

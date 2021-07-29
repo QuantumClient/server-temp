@@ -199,6 +199,37 @@ router.post('/auth/users/:uuid/access', (req, res) => {
   })();
 });
 
+router.delete('/me/online', (req, res) => {
+  (async () => {
+    try {
+      const api = await instance.delete("me/online", { headers: { authorization: req.headers.authorization } });
+      res.status(api.status).send(api.data)
+    } catch (e) {
+      res.status(e.response.status).send(e.response.data);
+    }
+  })();
+});
 
+router.put('/me/online', (req, res) => {
+  (async () => {
+    try {
+      const api = await instance.put("me/online", req.body, { headers: { authorization: req.headers.authorization } });
+      res.status(api.status).send(api.data)
+    } catch (e) {
+      res.status(e.response.status).send(e.response.data);
+    }
+  })();
+});
+
+router.get('/me/online', (req, res) => {
+  (async () => {
+    try {
+      const api = await instance.get("me/online");
+      res.status(api.status).send(api.data)
+    } catch (e) {
+      res.status(e.response.status).send(e.response.data);
+    }
+  })();
+});
 
 export default router

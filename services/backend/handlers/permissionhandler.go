@@ -17,7 +17,7 @@ func GetPerms(w http.ResponseWriter, r *http.Request) {
 
 	uuidD := mux.Vars(r)["uuid"]
 
-	if (!util.IsUUID(uuidD)) {
+	if !util.IsUUID(uuidD) {
 		util.ErrorResponse(w, r, "Bad UUID")
 		return
 	}
@@ -46,7 +46,6 @@ func GetPerms(w http.ResponseWriter, r *http.Request) {
 	w.Write(response)
 
 }
-
 
 func GetAllAccounts(w http.ResponseWriter, r *http.Request) {
 
@@ -79,16 +78,16 @@ func CanRun(w http.ResponseWriter, r *http.Request) {
 	}
 
 	loginuser := &models.User{
-		Uuid:      bodyUser.Uuid,
-		Username:  bodyUser.Username,
-		Password:  bodyUser.Password,
+		Uuid:     bodyUser.Uuid,
+		Username: bodyUser.Username,
+		Password: bodyUser.Password,
 	}
 
-	_, err, uuidA := controllers.Login(loginuser)
+	token, err, uuidA := controllers.Login(loginuser)
 
 	if err != nil {
 		log.Println(err)
-		if (err == util.ErrNoAccount || err == util.ErrBadPassword) {
+		if err == util.ErrNoAccount || err == util.ErrBadPassword {
 			util.ErrorResponse(w, r, err.Error())
 			return
 		}
@@ -96,7 +95,7 @@ func CanRun(w http.ResponseWriter, r *http.Request) {
 
 	uuidD := mux.Vars(r)["uuid"]
 
-	if (!util.IsUUID(uuidD)) {
+	if !util.IsUUID(uuidD) {
 		util.ErrorResponse(w, r, "Bad UUID")
 		return
 	}
@@ -129,11 +128,11 @@ func CanRun(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-
 	preresponse := &authresponse{
 		Status:   s,
 		Uuid:     uuidA,
 		Username: bodyUser.Username,
+		Token:    token,
 	}
 
 	response, err := json.Marshal(preresponse)
@@ -149,9 +148,10 @@ func CanRun(w http.ResponseWriter, r *http.Request) {
 }
 
 type authresponse struct {
-	Status int 			`json:"status"`
-	Uuid uuid.UUID 		`json:"uuid"`
-	Username  string    `json:"username"`
+	Status   int       `json:"status"`
+	Uuid     uuid.UUID `json:"uuid"`
+	Username string    `json:"username"`
+	Token    string    `json:"token"`
 }
 
 func CheckToken(w http.ResponseWriter, r *http.Request) {
@@ -212,7 +212,7 @@ func SetAdmin(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 	}
-	log.Println(perms.Username + "/" + perms.ID.String() + " has set admin for user " + user.Username + "/" +  account.ID.String() + " to " + strconv.FormatBool(account.Admin))
+	log.Println(perms.Username + "/" + perms.ID.String() + " has set admin for user " + user.Username + "/" + account.ID.String() + " to " + strconv.FormatBool(account.Admin))
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
@@ -235,7 +235,6 @@ func ResetHWID(w http.ResponseWriter, r *http.Request) {
 
 	user := controllers.GetUserfromUUID(uuid)
 
-
 	err = controllers.ResetHwid(user.Uuid)
 
 	if err != nil {
@@ -248,7 +247,7 @@ func ResetHWID(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 	}
 
-	log.Println(perms.Username + "/" + perms.ID.String() + " has reset hwid for " + user.Username + "/" +  user.Uuid.String())
+	log.Println(perms.Username + "/" + perms.ID.String() + " has reset hwid for " + user.Username + "/" + user.Uuid.String())
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
@@ -285,7 +284,7 @@ func SetAccess(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 	}
-	log.Println(perms.Username + "/" + perms.ID.String() + " has set access for user " + user.Username + "/" +  account.ID.String() + " to " + strconv.FormatBool(account.Admin))
+	log.Println(perms.Username + "/" + perms.ID.String() + " has set access for user " + user.Username + "/" + account.ID.String() + " to " + strconv.FormatBool(account.Admin))
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
