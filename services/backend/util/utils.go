@@ -8,6 +8,6 @@ func IsUUID(uuid string) bool {
 }
 
 func Alphanumeric3p(s string) bool {
-	r := regexp.MustCompile(`^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){3,50}[a-zA-Z0-9]$`)
+	r := regexp.MustCompile(`^[a-zA-Z0-9_]{3,20}$`)
 	return r.MatchString(s)
 }
