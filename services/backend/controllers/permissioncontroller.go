@@ -31,6 +31,7 @@ func GetAllAccounts() []models.Permission {
 				log.Fatal(err)
 			}
 		}
+		defer res.Close()
 		perms = append(perms, perm)
 	}
 

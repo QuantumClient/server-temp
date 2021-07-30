@@ -45,6 +45,9 @@
           <li v-if="$auth.loggedIn" class="hover:border-bluh border-accent border-b-2">
             <nuxt-link to="/dashboard/"> Profile </nuxt-link>
           </li>
+          <li v-if="$auth.user.admid" class="hover:border-bluh border-accent border-b-2">
+            <nuxt-link to="/dashboard/admin"> Admin </nuxt-link>
+          </li>
           <li>
             <NuxtLink class="cta bg-bluh hover:bg-bluh-600 px-3 py-2 rounded text-white font-semibold" to="/auth/Login">Login</NuxtLink>
           </li>
@@ -93,7 +96,10 @@
             <a href="https://github.com/quantumclient" @click="isOpen = false" class="my-4 inline-block">GitHub</a>
           </li>
           <li v-if="$auth.loggedIn">
-            <NuxtLink to="/dashboard" @click="isOpen = false" class="my-4 inline-block">Projects</NuxtLink>
+            <NuxtLink to="/dashboard" @click="isOpen = false" class="my-4 inline-block">Profile</NuxtLink>
+          </li>
+          <li v-if="$auth.user.admid">
+            <NuxtLink to="/dashboard/admin" @click="isOpen = false" class="my-4 inline-block">Admin Panel</NuxtLink>
           </li>
           <li>
             <NuxtLink to="/auth/Login" @click="isOpen = false" class="my-8 w-full text-center font-semibold cta inline-block bg-bluh hover:bg-bluh-600  px-3 py-2 rounded text-white">Login</NuxtLink>

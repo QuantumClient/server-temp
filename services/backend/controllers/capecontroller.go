@@ -28,10 +28,13 @@ func GetCapes() ([]byte, error) {
 
 		capes[uuid] = t
 	}
+	defer rows.Close()
+
 	err = rows.Err()
 	if err != nil {
 		log.Println(err)
 	}
+
 	return json.Marshal(capes)
 
 }

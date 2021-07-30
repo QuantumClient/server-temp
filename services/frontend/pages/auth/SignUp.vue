@@ -28,6 +28,17 @@ export default Vue.extend({
     }
   },
   methods: {
+    async shouldreg() {
+      var regexp = new RegExp('^[1-9]\d{0,2}$');
+      if (regexp.test(this.username)) {
+        this.register();
+      } else {
+        this.$toast.error('Make sure your username is alphanumer and at lest 3 chatacters long', {
+          position: "top-center",
+          duration : 5000
+        });
+      }
+    },
     async register() {
 
       try {

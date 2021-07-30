@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"regexp"
 	"strings"
 )
 
@@ -95,4 +96,10 @@ func AccessCheck(w http.ResponseWriter, r *http.Request) (bool, *models.Permissi
 		return false, nil
 	}
 	return true, perms
+}
+
+var isStringAlphabetic = regexp.MustCompile(`^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$`).MatchString
+
+func Alphanumeric3p(s string) bool {
+	return isStringAlphabetic(s)
 }

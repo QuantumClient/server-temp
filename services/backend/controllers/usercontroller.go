@@ -52,6 +52,11 @@ func GetUserfromUUID(uuid uuid.UUID) *models.User {
 }
 
 func Signup(user *models.User) (string, error) {
+
+	if !util.Alphanumeric3p(user.Username) {
+		return "", util.ErrIUsername
+	}
+
 	nameCheck := GetUserfromName(user.Username)
 
 	if nameCheck.Uuid != uuid.Nil {

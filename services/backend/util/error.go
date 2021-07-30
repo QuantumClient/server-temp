@@ -8,19 +8,20 @@ import (
 )
 
 type Error struct {
-	Status string `json:"status"`
+	Status  string `json:"status"`
 	Message string `json:"error"`
 }
 
 var (
 	ErrBadPassword = errors.New("key is invalid")
-	ErrNoAccount  = errors.New("key is of invalid type")
-	ErrUsername  = errors.New("Username is already used")
+	ErrNoAccount   = errors.New("key is of invalid type")
+	ErrUsername    = errors.New("Username is already used")
+	ErrIUsername   = errors.New("Username is not vaild")
 )
 
 func ErrorResponse(w http.ResponseWriter, r *http.Request, reson string) {
 
-	response, err := json.Marshal(Error{"failed",reson})
+	response, err := json.Marshal(Error{"failed", reson})
 
 	if err != nil {
 		log.Println(err)
@@ -31,4 +32,3 @@ func ErrorResponse(w http.ResponseWriter, r *http.Request, reson string) {
 	w.Write(response)
 
 }
-
