@@ -29,7 +29,7 @@ export default Vue.extend({
   },
   methods: {
     async shouldreg() {
-      var regexp = new RegExp('^[1-9]\d{0,2}$');
+      var regexp = new RegExp('^[a-zA-Z0-9_]{3,20}$');
       if (regexp.test(this.username)) {
         this.register();
       } else {
