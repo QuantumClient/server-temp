@@ -91,3 +91,6 @@ sw.*
 
 # sql
 .sql
+
+# database
+db

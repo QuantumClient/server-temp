@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  frontend:
+    container_name: 'quantum_frontend'
+    build: ./frontend
+    restart: always
+    ports:
+      - "3000:3000"
+  backend:
+    container_name: 'quantum_backend'
+    build: ./backend
+    ports:
+    - "8080:8080"
+    depends_on:
+      - db
+  db:
+    container_name: 'quantum_db'
+    image: mariadb:latest
+    restart: always
+    environment:
+      - MYSQL_DATABASE=quantum #${DB_DATABASE}
+      - MYSQL_ROOT_PASSWORD=root #${DB_ROOT_PASSWORD}
+      - MYSQL_USER=server #${DB_USER}
+      - MYSQL_PASSWORD=password #${DB_PASSWORD}
+    volumes:
+        - ./db:/var/lib/mysql
+    ports:
+      - "3306:3306"
