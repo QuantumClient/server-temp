@@ -5,6 +5,6 @@ import (
 )
 
 type Cape struct {
-	Uuid      uuid.UUID `json:"uuid"`
-	CapeType  int 		`json:"type"`
+	Uuid     uuid.UUID `json:"uuid"`
+	CapeType int       `json:"type"`
 }

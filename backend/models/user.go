@@ -17,18 +17,17 @@ type User struct {
 }
 
 type UserResponse struct {
-	Uuid uuid.UUID 		`json:"uuid"`
-	Username  string    `json:"username"`
-	Token string 		`json:"token"`
+	Uuid     uuid.UUID `json:"uuid"`
+	Username string    `json:"username"`
+	Token    string    `json:"token"`
 }
 
 type ReUser struct {
-	Uuid      uuid.UUID `json:"uuid"`
-	Username  string    `json:"username"`
-	Password  string    `json:"password"`
-	Hwid	  string    `json:"hwid"`
+	Uuid     uuid.UUID `json:"uuid"`
+	Username string    `json:"username"`
+	Password string    `json:"password"`
+	Hwid     string    `json:"hwid"`
 }
-
 
 func NewUser(username, password string) (*User, error) {
 	id := uuid.New()
@@ -64,11 +63,11 @@ func (u User) GenerateJWT() (string, error) {
 	perms := PermsfromUser(&u)
 	signingKey := []byte(os.Getenv("JWT_SECRET"))
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"exp": time.Now().Add(time.Hour * 2).Unix(),
-		"uuid": u.Uuid,
+		"exp":      time.Now().Add(time.Hour * 2).Unix(),
+		"uuid":     u.Uuid,
 		"username": u.Username,
-		"admin": perms.Admin,
-		"access": perms.Access,
+		"admin":    perms.Admin,
+		"access":   perms.Access,
 	})
 	tokenString, err := token.SignedString(signingKey)
 	return tokenString, err
