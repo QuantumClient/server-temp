@@ -68,6 +68,7 @@ func Signup(user *models.User) (string, error) {
 		log.Println(err)
 	}
 	_, queryError := stmt.Exec(user.Uuid, user.Username, user.Password, user.UpdatedAt, user.CreatedAt)
+
 	if queryError != nil {
 		log.Println(err)
 	}
@@ -80,7 +81,6 @@ func Signup(user *models.User) (string, error) {
 	if err != nil {
 		log.Println(err)
 	}
-
 	defer stmt.Close()
 	defer st.Close()
 	return user.GenerateJWT()

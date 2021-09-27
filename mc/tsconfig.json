@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "commonJS",
+    "target": "es2016",
+    "lib": ["es2016"],
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ]
+  }
+}

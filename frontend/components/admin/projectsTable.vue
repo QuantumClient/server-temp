@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white p-4 bg-accent shadow-md rounded-2xl min-w-min h-auto max-w-sm w-72 m-8" >
-    <table class="table-auto overflow-x-scroll w-full">
+    <table class="table-auto overflow-x-scroll">
       <thead class="bg-gray-300 border-b">
       <tr>
         <th class="px-4 py-2">Name</th>

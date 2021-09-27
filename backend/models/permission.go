@@ -7,12 +7,12 @@ import (
 )
 
 type Permission struct {
-	ID        uuid.UUID  `json:"uuid"`
-	Username  string     `json:"username"`
-	Admin     bool       `json:"admin"`
-	Access    bool       `json:"access"`
-	Hwid      NullString `json:"hwid"`
-	CreatedAt string     `json:"created_at"` //time was giving dumb errors with mysql
+	ID        uuid.UUID   `json:"uuid"`
+	Username  string      `json:"username"`
+	Admin     bool        `json:"admin"`
+	Access    bool        `json:"access"`
+	Hwid      *NullString `json:"hwid,omitempty"`
+	CreatedAt string      `json:"created_at"` //time was giving dumb errors with mysql
 }
 
 func PermsfromUser(user *User) *Permission {

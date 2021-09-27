@@ -22,6 +22,23 @@ func ValidateJWT(tokenString string) (jwt.MapClaims, error) {
 	return token.Claims.(jwt.MapClaims), err
 }
 
+func IsValid(r *http.Request) bool {
+	tokenString := r.Header.Get("Authorization")
+	if len(tokenString) == 0 {
+		return false
+	}
+	signingKey := []byte(os.Getenv("JWT_SECRET"))
+
+	tokenString = strings.Replace(tokenString, "Bearer ", "", 1)
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		return signingKey, nil
+	})
+	if err != nil {
+		return false
+	}
+	return token.Valid
+}
+
 func GetJWT(r *http.Request) string {
 	tokenString := r.Header.Get("Authorization")
 	if len(tokenString) == 0 {
@@ -95,4 +112,26 @@ func AccessCheck(w http.ResponseWriter, r *http.Request) (bool, *models.Permissi
 		return false, nil
 	}
 	return true, perms
+}
+
+func AccountCheck(w http.ResponseWriter, r *http.Request) *models.Permission {
+	token := GetJWT(r)
+
+	claims, err := ValidateJWT(token)
+
+	if err != nil {
+		log.Println(err)
+		ErrorResponse(w, r, "Invaild Token")
+		return nil
+	}
+
+	if claims.Valid == nil {
+		log.Println(err)
+		ErrorResponse(w, r, "Invaild Token")
+		return nil
+	}
+
+	_, perms := GetAccountsFromToken(claims)
+
+	return perms
 }

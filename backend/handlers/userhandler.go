@@ -5,6 +5,8 @@ import (
 	"backend/models"
 	"backend/util"
 	"encoding/json"
+	"github.com/google/uuid"
+	"github.com/gorilla/mux"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -125,6 +127,40 @@ func Me(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	w.Write(response)
+
+}
+
+func LinkMCAccount(w http.ResponseWriter, r *http.Request) {
+	perms := util.AccountCheck(w, r)
+	if perms == nil {
+		return
+	}
+	uuid, _ := uuid.Parse(mux.Vars(r)["uuid"])
+
+	if uuid != perms.ID {
+		util.ErrorResponse(w, r, util.ErrAccess.Error())
+		return
+	}
+	key := r.URL.Query().Get("key")
+
+	if len(key) < 8 {
+		util.ErrorResponse(w, r, "Invalid key")
+
+		return
+	}
+
+	capes, err := controllers.LinkMCAccount(perms, key)
+	if err != nil {
+		util.ErrorResponse(w, r, "Server side error")
+
+		return
+	}
+
+	response, _ := json.Marshal(capes)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)

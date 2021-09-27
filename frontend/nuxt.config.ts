@@ -98,6 +98,8 @@ export default <NuxtConfig>{
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    extractCSS: true,
+    publicPath: '/qcn/'
   },
 
   toast: {

@@ -6,6 +6,7 @@ import (
 	"github.com/joho/godotenv"
 	"log"
 	"os"
+	"time"
 )
 
 var Db *sql.DB
@@ -24,5 +25,6 @@ func Init() {
 	} else {
 		Db = db
 	}
+	Db.SetConnMaxLifetime(time.Minute * 5)
 
 }

@@ -10,16 +10,11 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"strconv"
 )
 
-func GetCapes(w http.ResponseWriter, r *http.Request) {
+func GetOldCapes(w http.ResponseWriter, r *http.Request) {
 
-	response, err := controllers.GetCapes()
-	if r.URL.Query().Get("form") == "true" {
-		capes := controllers.GetCapesForm()
-		response, err = json.Marshal(capes)
-	}
+	response, err := controllers.GetOldCapes()
 
 	if err != nil {
 		log.Println(err)
@@ -30,6 +25,37 @@ func GetCapes(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 	w.Write(response)
 
+}
+
+func GetCapesFull(w http.ResponseWriter, r *http.Request) {
+	if !util.IsValid(r) {
+		w.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+
+	response, err := json.Marshal(controllers.GetAllCapesFull())
+
+	if err != nil {
+		log.Println(err)
+		util.ErrorResponse(w, r, "Unknown error")
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	w.Write(response)
+}
+
+func GetGapes(w http.ResponseWriter, r *http.Request) {
+	response, err := json.Marshal(controllers.GetCapes())
+
+	if err != nil {
+		log.Println(err)
+		util.ErrorResponse(w, r, "Unknown error")
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	w.Write(response)
 }
 
 func DeleteCape(w http.ResponseWriter, r *http.Request) {
@@ -56,61 +82,26 @@ func DeleteCape(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func AddCape(w http.ResponseWriter, r *http.Request) {
-
-	check, perms := util.FullCheck(w, r)
-
-	if !check {
-		return
-	}
-
-	b, err := ioutil.ReadAll(r.Body)
-	defer r.Body.Close()
-	if err != nil {
-		http.Error(w, err.Error(), 500)
-		return
-	}
-	var cape *models.Cape
-	err = json.Unmarshal(b, &cape)
-	if err != nil {
-		http.Error(w, err.Error(), 500)
-		return
-	}
-	response, _ := controllers.AddCape(cape)
-
-	log.Println(perms.Username + "/" + perms.ID.String() + " has created cape " + cape.Uuid.String() + " with type " + strconv.Itoa(cape.CapeType))
-
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
-	w.Write(response)
-
-}
-
 func GetSingleCape(w http.ResponseWriter, r *http.Request) {
 
-	cape := &models.Cape{}
+	uuid, _ := uuid.Parse(mux.Vars(r)["uuid"])
 
-	cape.Uuid, _ = uuid.Parse(mux.Vars(r)["uuid"])
-
-	response, err := controllers.GetSingleCape(cape)
+	response, err := controllers.GetSingleCape(uuid)
 
 	if err != nil {
-		log.Println(err)
-	}
-
-	if response == nil {
 		util.ErrorResponse(w, r, "No cape with uuid")
 		return
 	}
+	json, _ := json.Marshal(response)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
-	w.Write(response)
+	w.Write(json)
 
 }
 
 func SetType(w http.ResponseWriter, r *http.Request) {
-	check, perms := util.FullCheck(w, r)
+	check, _ := util.FullCheck(w, r)
 
 	if !check {
 		return
@@ -140,7 +131,47 @@ func SetType(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 	}
-	log.Println(perms.Username + "/" + perms.ID.String() + " has changed cape type of cape " + cape.Uuid.String() + " to" + strconv.Itoa(cape.CapeType))
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	w.Write(response)
+
+}
+
+func SetEnabled(w http.ResponseWriter, r *http.Request) {
+	perms := util.AccountCheck(w, r)
+	if perms == nil {
+		return
+	}
+
+	uuid, _ := uuid.Parse(mux.Vars(r)["uuid"])
+
+	err := controllers.SetCapeEnabled(perms, uuid)
+
+	if err != nil {
+		util.ErrorResponse(w, r, util.ErrAccess.Error())
+		return
+	}
+
+	response, _ := json.Marshal(models.Cape{Uuid: uuid})
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	w.Write(response)
+
+}
+
+func GetUsersCapes(w http.ResponseWriter, r *http.Request) {
+
+	uuid, _ := uuid.Parse(mux.Vars(r)["uuid"])
+
+	capes := controllers.GetUsersCapes(uuid)
+
+	if len(capes) == 0 {
+		util.ErrorResponse(w, r, "User has no capes")
+		return
+	}
+	response, _ := json.Marshal(capes)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)

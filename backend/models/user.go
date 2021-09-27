@@ -29,6 +29,13 @@ type ReUser struct {
 	Hwid     string    `json:"hwid"`
 }
 
+type AuthResponse struct {
+	Status   int       `json:"status"`
+	Uuid     uuid.UUID `json:"uuid"`
+	Username string    `json:"username"`
+	Token    string    `json:"token"`
+}
+
 func NewUser(username, password string) (*User, error) {
 	id := uuid.New()
 	pw, err := hashPassword(password)
@@ -61,13 +68,22 @@ func (u *User) VerifyPassword(password string) bool {
 
 func (u User) GenerateJWT() (string, error) {
 	perms := PermsfromUser(&u)
+	return GenerateJWT(u.Uuid.String(), u.Username, perms.Admin, perms.Access)
+}
+
+func (r ReUser) VerifyPassword(password string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(password), []byte(r.Password))
+	return err != nil
+}
+
+func GenerateJWT(uuid, username string, admin, access bool) (string, error) {
 	signingKey := []byte(os.Getenv("JWT_SECRET"))
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"exp":      time.Now().Add(time.Hour * 2).Unix(),
-		"uuid":     u.Uuid,
-		"username": u.Username,
-		"admin":    perms.Admin,
-		"access":   perms.Access,
+		"uuid":     uuid,
+		"username": username,
+		"admin":    admin,
+		"access":   access,
 	})
 	tokenString, err := token.SignedString(signingKey)
 	return tokenString, err

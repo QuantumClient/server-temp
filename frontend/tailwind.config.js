@@ -13,5 +13,8 @@ module.exports = {
     fontFamily: {
       'sans': ['Tahoma', 'system-ui']
     }
-  }
+  },
+  purge: [
+    './**/*.vue'
+  ]
 }

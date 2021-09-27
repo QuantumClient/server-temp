@@ -173,7 +173,7 @@ export default Vue.extend({
     }
   },
   async fetch() {
-    this.users = (await this.$axios.get('/api/v1/auth/users')).data
+    this.users = (await this.$axios.get('/api/v1/users')).data
   }
 });
 </script>

@@ -15,8 +15,11 @@ type Error struct {
 var (
 	ErrBadPassword = errors.New("key is invalid")
 	ErrNoAccount   = errors.New("key is of invalid type")
-	ErrUsername    = errors.New("Username is already used")
-	ErrIUsername   = errors.New("Username is not vaild")
+	ErrUsername    = errors.New("username is already used")
+	ErrIUsername   = errors.New("username is not valid")
+	ErrAccess      = errors.New("you do not have access")
+	ErrCape        = errors.New("undefined cape error")
+	Err404         = errors.New("404 - Not found")
 )
 
 func ErrorResponse(w http.ResponseWriter, r *http.Request, reson string) {

@@ -14,7 +14,10 @@ import (
 )
 
 func GetPerms(w http.ResponseWriter, r *http.Request) {
-
+	if !util.IsValid(r) {
+		w.WriteHeader(http.StatusUnauthorized)
+		return
+	}
 	uuidD := mux.Vars(r)["uuid"]
 
 	if !util.IsUUID(uuidD) {
@@ -62,37 +65,18 @@ func GetAllAccounts(w http.ResponseWriter, r *http.Request) {
 }
 
 func CanRun(w http.ResponseWriter, r *http.Request) {
-
-	//all of this is shit code and need to be redone but i just wanna be done
 	b, err := ioutil.ReadAll(r.Body)
 	defer r.Body.Close()
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		util.ErrorResponse(w, r, err.Error())
 		return
 	}
 	var bodyUser *models.ReUser
 	err = json.Unmarshal(b, &bodyUser)
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		util.ErrorResponse(w, r, err.Error())
 		return
 	}
-
-	loginuser := &models.User{
-		Uuid:     bodyUser.Uuid,
-		Username: bodyUser.Username,
-		Password: bodyUser.Password,
-	}
-
-	token, err, uuidA := controllers.Login(loginuser)
-
-	if err != nil {
-		log.Println(err)
-		if err == util.ErrNoAccount || err == util.ErrBadPassword {
-			util.ErrorResponse(w, r, err.Error())
-			return
-		}
-	}
-
 	uuidD := mux.Vars(r)["uuid"]
 
 	if !util.IsUUID(uuidD) {
@@ -100,39 +84,16 @@ func CanRun(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	uuidB, err := uuid.Parse(uuidD)
-	if err != nil {
-		log.Println(err)
-	}
-	if uuidB != uuidA {
+	uuidB, _ := uuid.Parse(uuidD)
+	if uuidB != bodyUser.Uuid {
 		util.ErrorResponse(w, r, util.ErrNoAccount.Error())
 		return
 	}
 
-	userUUID := controllers.GetUserfromUUID(uuidB)
-
-	perms := models.PermsfromUser(userUUID)
-	if perms == nil {
-		util.ErrorResponse(w, r, "Unknown Error")
+	preresponse, err := controllers.CanRun(bodyUser)
+	if err != nil {
+		util.ErrorResponse(w, r, err.Error())
 		return
-	}
-	s := 0
-	if perms.Access {
-		if perms.Hwid.Valid {
-			if perms.Hwid.String == bodyUser.Hwid {
-				s = 1
-			}
-		} else {
-			controllers.SetHwid(bodyUser)
-			s = 1
-		}
-	}
-
-	preresponse := &authresponse{
-		Status:   s,
-		Uuid:     uuidA,
-		Username: bodyUser.Username,
-		Token:    token,
 	}
 
 	response, err := json.Marshal(preresponse)
@@ -145,13 +106,6 @@ func CanRun(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 	w.Write(response)
 
-}
-
-type authresponse struct {
-	Status   int       `json:"status"`
-	Uuid     uuid.UUID `json:"uuid"`
-	Username string    `json:"username"`
-	Token    string    `json:"token"`
 }
 
 func CheckToken(w http.ResponseWriter, r *http.Request) {

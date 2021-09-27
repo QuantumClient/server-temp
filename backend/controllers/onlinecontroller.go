@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-var limmit time.Duration = 6 * time.Second
+var limmit time.Duration = 6 * time.Hour
 var onlines []*models.Online
 
 func GetAllOnline() []*models.Online {

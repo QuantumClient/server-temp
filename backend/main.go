@@ -25,7 +25,7 @@ func main() {
 	log.Print("Connecting to database")
 	db.Init()
 	log.Println("Server started on port 8080")
-	err = http.ListenAndServe("0.0.0.0:8080", routers.GetRouter())
+	err = http.ListenAndServe("127.0.0.1:8080", routers.GetRouter())
 	if err != nil {
 		log.Print(err.Error())
 	}
