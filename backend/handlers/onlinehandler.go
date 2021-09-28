@@ -3,7 +3,6 @@ package handlers
 import (
 	"backend/controllers"
 	"backend/models"
-	"backend/util"
 	"encoding/json"
 	"io/ioutil"
 	"log"
@@ -25,10 +24,9 @@ func GetOnline(w http.ResponseWriter, r *http.Request) {
 }
 
 func AddToOnline(w http.ResponseWriter, r *http.Request) {
-
-	check, _ := util.AccessCheck(w, r)
-
-	if !check {
+	token, err := controllers.GetToken(r)
+	if err != nil || !token.Valid || !token.Claims.(*controllers.JwtCustomClaims).Access {
+		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
 
@@ -56,9 +54,9 @@ func AddToOnline(w http.ResponseWriter, r *http.Request) {
 
 func RemoveFromOnline(w http.ResponseWriter, r *http.Request) {
 
-	check, _ := util.AccessCheck(w, r)
-
-	if !check {
+	token, err := controllers.GetToken(r)
+	if err != nil || !token.Valid || !token.Claims.(*controllers.JwtCustomClaims).Access {
+		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
 

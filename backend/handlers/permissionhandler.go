@@ -14,7 +14,8 @@ import (
 )
 
 func GetPerms(w http.ResponseWriter, r *http.Request) {
-	if !util.IsValid(r) {
+	token, err := controllers.GetToken(r)
+	if err != nil || !token.Valid {
 		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
@@ -109,23 +110,13 @@ func CanRun(w http.ResponseWriter, r *http.Request) {
 }
 
 func CheckToken(w http.ResponseWriter, r *http.Request) {
-	token := util.GetJWT(r)
-	claims, err := util.ValidateJWT(token)
-
-	if err != nil {
-		log.Println(err)
-
-		util.ErrorResponse(w, r, "Invaild AccessToken")
+	token, err := controllers.GetToken(r)
+	if err != nil || !token.Valid {
+		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
 
-	if claims.Valid == nil {
-		log.Println(err)
-		util.ErrorResponse(w, r, "Invaild AccessToken")
-		return
-	}
-
-	response, err := json.Marshal(claims)
+	response, err := json.Marshal(token.Claims)
 
 	if err != nil {
 		log.Println(err)
@@ -138,11 +129,12 @@ func CheckToken(w http.ResponseWriter, r *http.Request) {
 }
 
 func SetAdmin(w http.ResponseWriter, r *http.Request) {
-	check, perms := util.FullCheck(w, r)
-
-	if !check {
+	token, err := controllers.GetToken(r)
+	if err != nil || !token.Valid || !token.Claims.(*controllers.JwtCustomClaims).Admin {
+		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
+
 	uuidD := mux.Vars(r)["uuid"]
 
 	uuid, err := uuid.Parse(uuidD)
@@ -166,7 +158,7 @@ func SetAdmin(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 	}
-	log.Println(perms.Username + "/" + perms.ID.String() + " has set admin for user " + user.Username + "/" + account.ID.String() + " to " + strconv.FormatBool(account.Admin))
+	log.Println(token.Claims.(*controllers.JwtCustomClaims).Username + "/" + token.Claims.(*controllers.JwtCustomClaims).Uuid + " has set admin for user " + user.Username + "/" + account.ID.String() + " to " + strconv.FormatBool(account.Admin))
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
@@ -175,9 +167,9 @@ func SetAdmin(w http.ResponseWriter, r *http.Request) {
 }
 
 func ResetHWID(w http.ResponseWriter, r *http.Request) {
-	check, perms := util.FullCheck(w, r)
-
-	if !check {
+	token, err := controllers.GetToken(r)
+	if err != nil || !token.Valid || !token.Claims.(*controllers.JwtCustomClaims).Admin {
+		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
 	uuidD := mux.Vars(r)["uuid"]
@@ -201,7 +193,7 @@ func ResetHWID(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 	}
 
-	log.Println(perms.Username + "/" + perms.ID.String() + " has reset hwid for " + user.Username + "/" + user.Uuid.String())
+	log.Println(token.Claims.(*controllers.JwtCustomClaims).Username + "/" + token.Claims.(*controllers.JwtCustomClaims).Uuid + " has reset hwid for " + user.Username + "/" + user.Uuid.String())
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
@@ -210,11 +202,12 @@ func ResetHWID(w http.ResponseWriter, r *http.Request) {
 }
 
 func SetAccess(w http.ResponseWriter, r *http.Request) {
-	check, perms := util.FullCheck(w, r)
-
-	if !check {
+	token, err := controllers.GetToken(r)
+	if err != nil || !token.Valid || !token.Claims.(*controllers.JwtCustomClaims).Admin {
+		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
+
 	uuidD := mux.Vars(r)["uuid"]
 
 	uuid, err := uuid.Parse(uuidD)
@@ -238,7 +231,7 @@ func SetAccess(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 	}
-	log.Println(perms.Username + "/" + perms.ID.String() + " has set access for user " + user.Username + "/" + account.ID.String() + " to " + strconv.FormatBool(account.Admin))
+	log.Println(token.Claims.(*controllers.JwtCustomClaims).Username + "/" + token.Claims.(*controllers.JwtCustomClaims).Uuid + " has set access for user " + user.Username + "/" + account.ID.String() + " to " + strconv.FormatBool(account.Admin))
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)

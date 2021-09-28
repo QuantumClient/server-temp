@@ -28,7 +28,8 @@ func GetOldCapes(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetCapesFull(w http.ResponseWriter, r *http.Request) {
-	if !util.IsValid(r) {
+	token, err := controllers.GetToken(r)
+	if err != nil || !token.Valid {
 		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
@@ -60,9 +61,9 @@ func GetGapes(w http.ResponseWriter, r *http.Request) {
 
 func DeleteCape(w http.ResponseWriter, r *http.Request) {
 
-	check, perms := util.FullCheck(w, r)
-
-	if !check {
+	token, err := controllers.GetToken(r)
+	if err != nil || !token.Valid || !token.Claims.(*controllers.JwtCustomClaims).Admin {
+		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
 
@@ -74,7 +75,7 @@ func DeleteCape(w http.ResponseWriter, r *http.Request) {
 		util.ErrorResponse(w, r, "Bad UUID")
 		return
 	}
-	log.Println(perms.Username + "/" + perms.ID.String() + " has deleted cape " + uuidD.String())
+	log.Println(token.Claims.(*controllers.JwtCustomClaims).Username + "/" + token.Claims.(*controllers.JwtCustomClaims).Uuid + " has deleted cape " + uuidD.String())
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
@@ -101,9 +102,9 @@ func GetSingleCape(w http.ResponseWriter, r *http.Request) {
 }
 
 func SetType(w http.ResponseWriter, r *http.Request) {
-	check, _ := util.FullCheck(w, r)
-
-	if !check {
+	token, err := controllers.GetToken(r)
+	if err != nil || !token.Valid || !token.Claims.(*controllers.JwtCustomClaims).Admin {
+		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
 
@@ -139,14 +140,17 @@ func SetType(w http.ResponseWriter, r *http.Request) {
 }
 
 func SetEnabled(w http.ResponseWriter, r *http.Request) {
-	perms := util.AccountCheck(w, r)
-	if perms == nil {
+	token, err := controllers.GetToken(r)
+	if err != nil || !token.Valid {
+		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
+	uID, _ := uuid.Parse(token.Claims.(*controllers.JwtCustomClaims).Uuid)
+	perms := models.PermsfromUser(&models.User{Uuid: uID, Username: token.Claims.(*controllers.JwtCustomClaims).Username})
 
 	uuid, _ := uuid.Parse(mux.Vars(r)["uuid"])
 
-	err := controllers.SetCapeEnabled(perms, uuid)
+	err = controllers.SetCapeEnabled(perms, uuid)
 
 	if err != nil {
 		util.ErrorResponse(w, r, util.ErrAccess.Error())

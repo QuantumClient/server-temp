@@ -1,6 +1,7 @@
 package routers
 
 import (
+	"backend/controllers"
 	"backend/handlers"
 	"backend/util"
 	"github.com/gorilla/mux"
@@ -68,7 +69,8 @@ func GetRouter() *mux.Router {
 
 func basicAuth(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if !util.IsValid(r) {
+		token, err := controllers.GetToken(r)
+		if err != nil || !token.Valid {
 			w.WriteHeader(http.StatusUnauthorized)
 			return
 		}

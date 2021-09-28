@@ -3,8 +3,6 @@
    <hero/>
     <projects id="projects" class="anchor"/>
     <devs />
-    <button class="button" @click="$auth.refreshTokens()"> click </button>
-
   </div>
 </template>
 

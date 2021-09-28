@@ -26,9 +26,9 @@ func GetProjects(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateProjectVersion(w http.ResponseWriter, r *http.Request) {
-	check, perms := util.FullCheck(w, r)
-
-	if !check {
+	token, err := controllers.GetToken(r)
+	if err != nil || !token.Valid || !token.Claims.(*controllers.JwtCustomClaims).Admin {
+		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
 
@@ -57,7 +57,7 @@ func UpdateProjectVersion(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 	}
-	log.Println(perms.Username + "/" + perms.ID.String() + " has updated the version for project " + project.Name + " to " + project.Verison)
+	log.Println(token.Claims.(*controllers.JwtCustomClaims).Username + "/" + token.Claims.(*controllers.JwtCustomClaims).Uuid + " has updated the version for project " + project.Name + " to " + project.Verison)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
@@ -88,9 +88,9 @@ func GetProject(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateProjectLink(w http.ResponseWriter, r *http.Request) {
-	check, perms := util.FullCheck(w, r)
-
-	if !check {
+	token, err := controllers.GetToken(r)
+	if err != nil || !token.Valid || !token.Claims.(*controllers.JwtCustomClaims).Admin {
+		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
 
@@ -120,7 +120,7 @@ func UpdateProjectLink(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 	}
 
-	log.Println(perms.Username + "/" + perms.ID.String() + " has updated the link for project " + project.Name + " to " + project.Link.String)
+	log.Println(token.Claims.(*controllers.JwtCustomClaims).Username + "/" + token.Claims.(*controllers.JwtCustomClaims).Uuid + " has updated the link for project " + project.Name + " to " + project.Link.String)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)

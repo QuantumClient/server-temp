@@ -98,23 +98,13 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 
 func Me(w http.ResponseWriter, r *http.Request) {
 
-	token := util.GetJWT(r)
-
-	claims, err := util.ValidateJWT(token)
-
-	if err != nil {
-		log.Println(err)
-		util.ErrorResponse(w, r, "Invaild AccessToken")
+	token, err := controllers.GetToken(r)
+	if err != nil || !token.Valid {
+		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
-
-	if claims.Valid == nil {
-		log.Println(err)
-		util.ErrorResponse(w, r, "Invaild AccessToken")
-		return
-	}
-
-	_, perms := util.GetAccountsFromToken(claims)
+	uID, _ := uuid.Parse(token.Claims.(*controllers.JwtCustomClaims).Uuid)
+	perms := models.PermsfromUser(&models.User{Uuid: uID, Username: token.Claims.(*controllers.JwtCustomClaims).Username})
 
 	response, err := json.Marshal(perms)
 
@@ -129,10 +119,14 @@ func Me(w http.ResponseWriter, r *http.Request) {
 }
 
 func LinkMCAccount(w http.ResponseWriter, r *http.Request) {
-	perms := util.AccountCheck(w, r)
-	if perms == nil {
+	token, err := controllers.GetToken(r)
+	if err != nil || !token.Valid {
+		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
+	uID, _ := uuid.Parse(token.Claims.(*controllers.JwtCustomClaims).Uuid)
+	perms := models.PermsfromUser(&models.User{Uuid: uID, Username: token.Claims.(*controllers.JwtCustomClaims).Username})
+
 	uuid, _ := uuid.Parse(mux.Vars(r)["uuid"])
 
 	if uuid != perms.ID {
