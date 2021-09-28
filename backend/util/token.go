@@ -69,13 +69,13 @@ func FullCheck(w http.ResponseWriter, r *http.Request) (bool, *models.Permission
 
 	if err != nil {
 		log.Println(err)
-		ErrorResponse(w, r, "Invaild Token")
+		ErrorResponse(w, r, "Invaild AccessToken")
 		return false, nil
 	}
 
 	if claims.Valid == nil {
 		log.Println(err)
-		ErrorResponse(w, r, "Invaild Token")
+		ErrorResponse(w, r, "Invaild AccessToken")
 		return false, nil
 	}
 
@@ -95,13 +95,13 @@ func AccessCheck(w http.ResponseWriter, r *http.Request) (bool, *models.Permissi
 
 	if err != nil {
 		log.Println(err)
-		ErrorResponse(w, r, "Invaild Token")
+		ErrorResponse(w, r, "Invaild AccessToken")
 		return false, nil
 	}
 
 	if claims.Valid == nil {
 		log.Println(err)
-		ErrorResponse(w, r, "Invaild Token")
+		ErrorResponse(w, r, "Invaild AccessToken")
 		return false, nil
 	}
 
@@ -121,13 +121,13 @@ func AccountCheck(w http.ResponseWriter, r *http.Request) *models.Permission {
 
 	if err != nil {
 		log.Println(err)
-		ErrorResponse(w, r, "Invaild Token")
+		ErrorResponse(w, r, "Invaild AccessToken")
 		return nil
 	}
 
 	if claims.Valid == nil {
 		log.Println(err)
-		ErrorResponse(w, r, "Invaild Token")
+		ErrorResponse(w, r, "Invaild AccessToken")
 		return nil
 	}
 

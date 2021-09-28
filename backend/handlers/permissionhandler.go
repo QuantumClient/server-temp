@@ -115,13 +115,13 @@ func CheckToken(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 
-		util.ErrorResponse(w, r, "Invaild Token")
+		util.ErrorResponse(w, r, "Invaild AccessToken")
 		return
 	}
 
 	if claims.Valid == nil {
 		log.Println(err)
-		util.ErrorResponse(w, r, "Invaild Token")
+		util.ErrorResponse(w, r, "Invaild AccessToken")
 		return
 	}
 
@@ -241,6 +241,40 @@ func SetAccess(w http.ResponseWriter, r *http.Request) {
 	log.Println(perms.Username + "/" + perms.ID.String() + " has set access for user " + user.Username + "/" + account.ID.String() + " to " + strconv.FormatBool(account.Admin))
 
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	w.Write(response)
+
+}
+
+func GetUserKey(w http.ResponseWriter, r *http.Request) {
+	token, err := controllers.GetToken(r)
+
+	if err != nil {
+		log.Println(err)
+		util.ErrorResponse(w, r, util.ErrToken.Error())
+		return
+	}
+
+	if !token.Claims.(*controllers.JwtCustomClaims).Access {
+		util.ErrorResponse(w, r, util.ErrAccess.Error())
+		return
+	}
+	userUuid, _ := uuid.Parse(mux.Vars(r)["uuid"])
+	refreshToken := controllers.RefreshFromUUID(userUuid)
+
+	type rB struct {
+		Uuid  uuid.UUID `json:"uuid"`
+		Token string    `json:"token"`
+	}
+
+	response, _ := json.Marshal(rB{
+		Uuid:  userUuid,
+		Token: refreshToken,
+	})
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Content-Disposition", "attachment; filename=key.qt")
+
 	w.WriteHeader(http.StatusCreated)
 	w.Write(response)
 

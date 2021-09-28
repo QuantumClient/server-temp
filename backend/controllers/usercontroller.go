@@ -8,20 +8,27 @@ import (
 	"log"
 )
 
-func Login(user *models.User) (string, error, uuid.UUID) {
+func Login(user *models.User) (*models.UserResponse, error) {
 
 	result := GetUserfromName(user.Username)
 	if result == nil {
-		return "", util.ErrNoAccount, uuid.Nil
+		return nil, util.ErrNoAccount
 	}
 
 	if result.VerifyPassword(user.Password) {
-		return "", util.ErrBadPassword, uuid.Nil
+		return nil, util.ErrBadPassword
 	}
 
-	token, err := result.GenerateJWT()
+	response := &models.UserResponse{
+		Uuid:     result.Uuid,
+		Username: result.Username,
+	}
 
-	return token, err, result.Uuid
+	acc := models.PermsfromUser(result)
+	response.AccessToken = GetJWT(acc)
+	response.RefreshToken = GetRefreshToken(acc.ID, result.Password)
+
+	return response, nil
 
 }
 
@@ -83,6 +90,19 @@ func Signup(user *models.User) (string, error) {
 	}
 	defer stmt.Close()
 	defer st.Close()
-	return user.GenerateJWT()
+	return GetJWT(models.PermsfromUser(user)), nil
 
+}
+
+func getHashedPassword(uuid uuid.UUID) string {
+	rows, err := db.Db.Query("SELECT password FROM users WHERE uuid = ?", uuid)
+	if err != nil {
+		log.Println(err)
+	}
+	var password string
+	if rows.Next() {
+		rows.Scan(&password)
+	}
+	defer rows.Close()
+	return password
 }

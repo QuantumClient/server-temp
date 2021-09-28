@@ -26,7 +26,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	token, err, uuid := controllers.Login(user)
+	response, err := controllers.Login(user)
 
 	if err != nil {
 		log.Println(err)
@@ -34,12 +34,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 			util.ErrorResponse(w, r, err.Error())
 			return
 		}
-	}
-
-	response := models.UserResponse{
-		Uuid:     uuid,
-		Username: user.Username,
-		Token:    token,
 	}
 
 	json, err := json.Marshal(response)
@@ -84,9 +78,9 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 	}
 
 	response := models.UserResponse{
-		Uuid:     user.Uuid,
-		Username: user.Username,
-		Token:    token,
+		Uuid:        user.Uuid,
+		Username:    user.Username,
+		AccessToken: token,
 	}
 
 	json, err := json.Marshal(response)
@@ -110,13 +104,13 @@ func Me(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		log.Println(err)
-		util.ErrorResponse(w, r, "Invaild Token")
+		util.ErrorResponse(w, r, "Invaild AccessToken")
 		return
 	}
 
 	if claims.Valid == nil {
 		log.Println(err)
-		util.ErrorResponse(w, r, "Invaild Token")
+		util.ErrorResponse(w, r, "Invaild AccessToken")
 		return
 	}
 
@@ -161,6 +155,40 @@ func LinkMCAccount(w http.ResponseWriter, r *http.Request) {
 	}
 
 	response, _ := json.Marshal(capes)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	w.Write(response)
+
+}
+
+func Refresh(w http.ResponseWriter, r *http.Request) {
+	b, err := ioutil.ReadAll(r.Body)
+	defer r.Body.Close()
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	var req struct {
+		RefreshToken string `json:"refresh_token"`
+	}
+	err = json.Unmarshal(b, &req)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	acc, err := controllers.AccountFromRefresh(req.RefreshToken)
+	if err != nil {
+		util.ErrorResponse(w, r, err.Error())
+		return
+	}
+
+	type responseBody struct {
+		Token string `json:"access_token"`
+	}
+	jwt := controllers.GetJWT(acc)
+	response, _ := json.Marshal(responseBody{Token: jwt})
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)

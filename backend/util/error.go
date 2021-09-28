@@ -20,6 +20,7 @@ var (
 	ErrAccess      = errors.New("you do not have access")
 	ErrCape        = errors.New("undefined cape error")
 	Err404         = errors.New("404 - Not found")
+	ErrToken       = errors.New("bad token")
 )
 
 func ErrorResponse(w http.ResponseWriter, r *http.Request, reson string) {

@@ -35,6 +35,8 @@ func GetRouter() *mux.Router {
 
 	auth.HandleFunc("/login", handlers.Login).Methods("PUT")
 	auth.HandleFunc("/register", handlers.Signup).Methods("PUT")
+	auth.HandleFunc("/refresh", handlers.Refresh).Methods("POST")
+
 	auth.HandleFunc("/users", func(w http.ResponseWriter, req *http.Request) {
 		http.Redirect(w, req, "/api/v1/users", http.StatusTemporaryRedirect)
 	}).Methods("GET")
@@ -52,6 +54,7 @@ func GetRouter() *mux.Router {
 	users.HandleFunc("/", handlers.GetAllAccounts).Methods("GET")
 	users.HandleFunc("/{uuid:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[8|9|aA|bB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}}/link", handlers.LinkMCAccount).Methods("POST")
 	users.HandleFunc("/{uuid:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[8|9|aA|bB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}}/capes", handlers.GetUsersCapes).Methods("GET")
+	users.HandleFunc("/{uuid:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[8|9|aA|bB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}}/key", handlers.GetUserKey).Methods("GET")
 
 	var mc = api.PathPrefix("/mc").Subrouter()
 

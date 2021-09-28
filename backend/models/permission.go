@@ -16,10 +16,14 @@ type Permission struct {
 }
 
 func PermsfromUser(user *User) *Permission {
-	perms := &Permission{}
-
-	perms.ID = user.Uuid
-	perms.Username = user.Username
+	perms := &Permission{
+		ID:        user.Uuid,
+		Username:  user.Username,
+		Admin:     false,
+		Access:    false,
+		Hwid:      nil,
+		CreatedAt: "",
+	}
 
 	res, err := db.Db.Query("SELECT * FROM permissions WHERE uuid=?", perms.ID)
 	defer res.Close()

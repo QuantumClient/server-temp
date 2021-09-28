@@ -1,23 +1,9 @@
 <template>
-  <div>
-    <div class="justify-center p-2 rounded-t-2xl  bg-accent">
-      <h2 class="text-xl text-center">Key</h2>
-    </div>
-
-    <div class="p-5 bg-contrast">
-      <label class="text-s my-2.5">Password</label>
-      <input
-        v-model="user.password"
-        type="password"
-        class="w-full h-full appearance-none rounded-md focus:border-bluh text-accent"
-      />
-    </div>
-
-    <div @click="downloadConfig" class="p-2 rounded-b-2xl bg-accent hover:bg-bluh shadow-md">
-      <button class=" py-1 bg-indigo-600 text-white rounded-md text-m focus:outline-none">
-        Download
-      </button>
-    </div>
+  <div class="flex flex-col justify-center w-full px-8 mx-6 my-12 text-center rounded-md md:w-96 lg:w-80 xl:w-64 bg-bluh text-coolGray-100 shadow-md transform duration-500 hover:-translate-y-1">
+    <a>Account Key</a>
+    <button @click="downloadConfig" class=" py-1 bg-indigo-600 text-white rounded-md text-m focus:outline-none">
+      Download
+    </button>
   </div>
 </template>
 
@@ -33,18 +19,11 @@ interface UserConfig {
 export default Vue.extend({
   name: "download",
   middleware: 'auth',
-  data() {
-    return {
-      user: {username: "", uuid: ""} as UserConfig
-    }
-  },
   methods: {
     async downloadConfig() {
       try {
-
-        this.user.username = this.$auth.user.username.toString()
-        this.user.uuid = this.$auth.user.uuid.toString()
-        this.$download(this.user, "key.qt")
+        let data = (await this.$axios.$get(`/api/v1/users/${this.$auth.user.uuid}/key`)).data
+        this.$download(data, "key.qt")
       } catch (err) {
         console.log(err)
       }

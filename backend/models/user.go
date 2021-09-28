@@ -1,10 +1,8 @@
 package models
 
 import (
-	"github.com/dgrijalva/jwt-go"
 	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
-	"os"
 	"time"
 )
 
@@ -17,9 +15,10 @@ type User struct {
 }
 
 type UserResponse struct {
-	Uuid     uuid.UUID `json:"uuid"`
-	Username string    `json:"username"`
-	Token    string    `json:"token"`
+	Uuid         uuid.UUID `json:"uuid"`
+	Username     string    `json:"username"`
+	AccessToken  string    `json:"access_token"`
+	RefreshToken string    `json:"refresh_token"`
 }
 
 type ReUser struct {
@@ -66,25 +65,7 @@ func (u *User) VerifyPassword(password string) bool {
 	return err != nil
 }
 
-func (u User) GenerateJWT() (string, error) {
-	perms := PermsfromUser(&u)
-	return GenerateJWT(u.Uuid.String(), u.Username, perms.Admin, perms.Access)
-}
-
 func (r ReUser) VerifyPassword(password string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(password), []byte(r.Password))
 	return err != nil
-}
-
-func GenerateJWT(uuid, username string, admin, access bool) (string, error) {
-	signingKey := []byte(os.Getenv("JWT_SECRET"))
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"exp":      time.Now().Add(time.Hour * 2).Unix(),
-		"uuid":     uuid,
-		"username": username,
-		"admin":    admin,
-		"access":   access,
-	})
-	tokenString, err := token.SignedString(signingKey)
-	return tokenString, err
 }

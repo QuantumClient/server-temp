@@ -106,7 +106,12 @@ func CanRun(user *models.ReUser) (models.AuthResponse, error) {
 		}
 	}
 
-	token, err := models.GenerateJWT(user.Uuid.String(), user.Username, admin, true)
+	token := GetJWT(&models.Permission{
+		ID:       user.Uuid,
+		Username: user.Username,
+		Admin:    admin,
+		Access:   true,
+	})
 	if err != nil {
 		log.Println(err)
 	}
@@ -140,4 +145,17 @@ func LinkMCAccount(perms *models.Permission, key string) (*models.Cape, error) {
 	}
 	return cape, nil
 
+}
+
+func getAccountfromUUID(uuid uuid.UUID) *models.Permission {
+	rows, err := db.Db.Query("SELECT p.uuid, u.username, p.access, p.admin FROM permissions p INNER JOIN users u on p.uuid = u.uuid WHERE p.uuid = ?", uuid)
+	if err != nil {
+		log.Println(err)
+	}
+	account := &models.Permission{}
+	if rows.Next() {
+		rows.Scan(&account.ID, &account.Username, &account.Access, &account.Admin)
+	}
+	defer rows.Close()
+	return account
 }

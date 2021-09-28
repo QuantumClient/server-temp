@@ -75,13 +75,22 @@ export default <NuxtConfig>{
   auth: {
     strategies: {
       local: {
+        scheme: 'refresh',
         endpoints: {
-          login: { url: '/api/v1/auth/login', method: 'put', propertyName: 'token' },
+          login: { url: '/api/v1/auth/login', method: 'put' },
+          refresh: { url: '/api/v1/auth/refresh', method: 'post'},
           user: { url: '/api/v1/auth/token', method: 'get'}
         },
         token: {
           type: 'Bearer',
           name: 'Authorization',
+          property: 'access_token',
+          maxAge: 60 * 60 * 2
+        },
+        refreshToken: {
+          property: 'refresh_token',
+          data: 'refresh_token',
+          maxAge: 60 * 60 * 24 * 90
         },
         user: {
           property: false,
