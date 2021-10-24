@@ -33,6 +33,8 @@ export default <NuxtConfig>{
     ]
   },
 
+  modern: true,
+
   loading: {
     color: '#565AA6',
     height: '8px'
@@ -79,7 +81,8 @@ export default <NuxtConfig>{
         endpoints: {
           login: { url: '/api/v1/auth/login', method: 'put' },
           refresh: { url: '/api/v1/auth/refresh', method: 'post'},
-          user: { url: '/api/v1/auth/token', method: 'get'}
+          user: { url: '/api/v1/auth/token', method: 'get'},
+          logout: false
         },
         token: {
           type: 'Bearer',
@@ -108,7 +111,16 @@ export default <NuxtConfig>{
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     extractCSS: true,
-    publicPath: '/qcn/'
+    publicPath: '/cdn/',
+    filenames: {
+      app: ({ isDev, isModern }) => isDev ? `[name]${isModern ? '.modern' : ''}.js` : `js/[contenthash:7]${isModern ? '.modern' : ''}.js`,
+      chunk: ({ isDev, isModern }) => isDev ? `[name]${isModern ? '.modern' : ''}.js` : `js/[contenthash:7]${isModern ? '.modern' : ''}.js`,
+      css: ({ isDev }) => isDev ? '[name].css' : 'css/[contenthash:7].css',
+      img: ({ isDev }) => isDev ? '[path][name].[ext]' : 'img/[name].[contenthash:7].[ext]',
+      font: ({ isDev }) => isDev ? '[path][name].[ext]' : 'fonts/[name].[contenthash:7].[ext]',
+      video: ({ isDev }) => isDev ? '[path][name].[ext]' : 'videos/[name].[contenthash:7].[ext]'
+    }
+
   },
 
   toast: {

@@ -21,11 +21,18 @@ type UserResponse struct {
 	RefreshToken string    `json:"refresh_token"`
 }
 
-type ReUser struct {
+type LegUserCheck struct {
 	Uuid     uuid.UUID `json:"uuid"`
 	Username string    `json:"username"`
 	Password string    `json:"password"`
 	Hwid     string    `json:"hwid"`
+}
+
+type AuthUserReq struct {
+	Uuid         uuid.UUID `json:"uuid"`
+	RefreshToken string    `json:"refresh_token"`
+	CheckSum     string    `json:"sum"`
+	Hwid         string    `json:"hwid"`
 }
 
 type AuthResponse struct {
@@ -65,7 +72,7 @@ func (u *User) VerifyPassword(password string) bool {
 	return err != nil
 }
 
-func (r ReUser) VerifyPassword(password string) bool {
+func (r LegUserCheck) VerifyPassword(password string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(password), []byte(r.Password))
 	return err != nil
 }

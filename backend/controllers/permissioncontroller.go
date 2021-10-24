@@ -30,9 +30,9 @@ func GetAllAccounts() []models.Permission {
 	return perms
 }
 
-func SetHwid(user *models.ReUser) error {
+func SetHwid(hwid, uuid string) error {
 
-	_, err := db.Db.Exec("UPDATE permissions SET hwid=? WHERE uuid=?", user.Hwid, user.Uuid)
+	_, err := db.Db.Exec("UPDATE permissions SET hwid=? WHERE uuid=?", hwid, uuid)
 	if err != nil {
 		log.Println(err)
 	}
@@ -70,7 +70,7 @@ func SetAccess(perms *models.Permission, access bool) error {
 	return err
 }
 
-func CanRun(user *models.ReUser) (models.AuthResponse, error) {
+func CanRunLeg(user *models.LegUserCheck) (models.AuthResponse, error) {
 	res, err := db.Db.Query("SELECT u.uuid, username, hwid, admin, u.password FROM permissions p JOIN users u ON p.uuid = u.uuid AND p.access = 1 AND u.username = ? AND u.uuid = ?", user.Username, user.Uuid)
 	defer res.Close()
 
@@ -100,18 +100,18 @@ func CanRun(user *models.ReUser) (models.AuthResponse, error) {
 	if hwid.Valid && hwid.String == user.Hwid {
 		response.Status = 1
 	} else {
-		err = SetHwid(user)
+		err = SetHwid(user.Hwid, user.Uuid.String())
 		if err != nil {
 			log.Println(err)
 		}
 	}
 
-	token := GetJWT(&models.Permission{
+	token := GetJWTCustomTime(&models.Permission{
 		ID:       user.Uuid,
 		Username: user.Username,
 		Admin:    admin,
 		Access:   true,
-	})
+	}, 24)
 	if err != nil {
 		log.Println(err)
 	}
@@ -158,4 +158,50 @@ func getAccountfromUUID(uuid uuid.UUID) *models.Permission {
 	}
 	defer rows.Close()
 	return account
+}
+
+func Verify(user *models.AuthUserReq) (models.AuthResponse, error) {
+	res, err := db.Db.Query("SELECT u.uuid, username, hwid, admin FROM permissions p JOIN users u ON p.uuid = u.uuid AND p.access = 1 AND u.uuid = ?", user.Uuid)
+	defer res.Close()
+
+	var response models.AuthResponse
+	if err != nil {
+		log.Println(err)
+		return response, util.ErrAccess
+	}
+
+	var (
+		hwid  sql.NullString
+		admin bool
+	)
+
+	if res.Next() {
+		err = res.Scan(&response.Uuid, &response.Username, &hwid, &admin)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+
+	if hwid.Valid && hwid.String == user.Hwid {
+		response.Status = 1
+	} else {
+		err = SetHwid(user.Hwid, user.Uuid.String())
+		if err != nil {
+			log.Println(err)
+		}
+	}
+
+	token := GetJWTCustomTime(&models.Permission{
+		ID:       user.Uuid,
+		Username: response.Username,
+		Admin:    admin,
+		Access:   true,
+	}, 24)
+	if err != nil {
+		log.Println(err)
+	}
+	response.Token = token
+
+	return response, nil
 }

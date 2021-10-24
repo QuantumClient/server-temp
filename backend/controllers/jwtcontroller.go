@@ -20,12 +20,16 @@ type JwtCustomClaims struct {
 	jwt.RegisteredClaims
 }
 
-type jwtRefreshClaims struct {
+type JwtRefreshClaims struct {
 	Uuid string `json:"uuid"`
 	jwt.RegisteredClaims
 }
 
 func GetJWT(user *models.Permission) string {
+	return GetJWTCustomTime(user, 2)
+}
+
+func GetJWTCustomTime(user *models.Permission, hourX int64) string {
 	signingKey := []byte(os.Getenv("JWT_SECRET"))
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &JwtCustomClaims{
 		Uuid:     user.ID.String(),
@@ -33,7 +37,7 @@ func GetJWT(user *models.Permission) string {
 		Admin:    user.Admin,
 		Access:   user.Access,
 		RegisteredClaims: jwt.RegisteredClaims{
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(2 * time.Hour)),
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Duration(hourX) * time.Hour)),
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
 			NotBefore: jwt.NewNumericDate(time.Now()),
 		},
@@ -62,7 +66,7 @@ func GetRefreshToken(uuid uuid.UUID, hashedPassword string) string {
 
 	signingKey := []byte(os.Getenv("REFRESH_SECRET") + hashedPassword)
 
-	token := jwt.NewWithClaims(jwt.SigningMethodHS512, &jwtRefreshClaims{
+	token := jwt.NewWithClaims(jwt.SigningMethodHS512, &JwtRefreshClaims{
 		Uuid: uuid.String(),
 		RegisteredClaims: jwt.RegisteredClaims{
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
@@ -82,19 +86,23 @@ func RefreshFromUUID(uuid uuid.UUID) string {
 }
 
 func AccountFromRefresh(tokenString string) (*models.Permission, error) {
-	token, err := jwt.ParseWithClaims(tokenString, &jwtRefreshClaims{}, func(token *jwt.Token) (interface{}, error) {
-		uuid, _ := uuid.Parse(token.Claims.(*jwtRefreshClaims).Uuid)
-		pass := getHashedPassword(uuid)
-		return []byte(os.Getenv("REFRESH_SECRET") + pass), nil
-	})
+	token, err := JWTFromRefresh(tokenString)
 	if err != nil {
 		log.Println(err)
 		return nil, util.ErrToken
 	}
-	claims, ok := token.Claims.(*jwtRefreshClaims)
+	claims, ok := token.Claims.(*JwtRefreshClaims)
 	if !ok && !token.Valid {
 		return nil, util.ErrToken
 	}
 	uuid, _ := uuid.Parse(claims.Uuid)
 	return getAccountfromUUID(uuid), nil
+}
+
+func JWTFromRefresh(refreshToken string) (*jwt.Token, error) {
+	return jwt.ParseWithClaims(refreshToken, &JwtRefreshClaims{}, func(token *jwt.Token) (interface{}, error) {
+		uuid, _ := uuid.Parse(token.Claims.(*JwtRefreshClaims).Uuid)
+		pass := getHashedPassword(uuid)
+		return []byte(os.Getenv("REFRESH_SECRET") + pass), nil
+	})
 }

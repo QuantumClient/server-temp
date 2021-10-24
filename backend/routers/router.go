@@ -6,6 +6,7 @@ import (
 	"backend/util"
 	"github.com/gorilla/mux"
 	"net/http"
+	"strings"
 )
 
 func GetRouter() *mux.Router {
@@ -42,10 +43,11 @@ func GetRouter() *mux.Router {
 		http.Redirect(w, req, "/api/v1/users", http.StatusTemporaryRedirect)
 	}).Methods("GET")
 	auth.HandleFunc("/users/{uuid:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[8|9|aA|bB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}}", handlers.GetPerms).Methods("GET")
-	auth.HandleFunc("/users/{uuid:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[8|9|aA|bB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}}", handlers.CanRun).Methods("PUT")
+	auth.HandleFunc("/users/{uuid:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[8|9|aA|bB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}}", handlers.CanRunLeg).Methods("PUT")
 	auth.HandleFunc("/users/{uuid:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[8|9|aA|bB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}}/admin", handlers.SetAdmin).Methods("POST")
 	auth.HandleFunc("/users/{uuid:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[8|9|aA|bB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}}/hwid", handlers.ResetHWID).Methods("POST")
 	auth.HandleFunc("/users/{uuid:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[8|9|aA|bB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}}/access", handlers.SetAccess).Methods("POST")
+	auth.HandleFunc("/verify", handlers.Verify).Methods("GET")
 	auth.HandleFunc("/token", handlers.CheckToken).Methods("GET")
 	auth.HandleFunc("/me", handlers.Me).Methods("GET")
 
@@ -69,6 +71,10 @@ func GetRouter() *mux.Router {
 
 func basicAuth(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		co, err := r.Cookie("auth._token.local")
+		if err == nil {
+			r.Header.Set("Authorization", strings.Replace(co.Value, "%20", " ", 1))
+		}
 		token, err := controllers.GetToken(r)
 		if err != nil || !token.Valid {
 			w.WriteHeader(http.StatusUnauthorized)

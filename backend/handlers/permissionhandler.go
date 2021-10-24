@@ -4,6 +4,8 @@ import (
 	"backend/controllers"
 	"backend/models"
 	"backend/util"
+	"crypto/md5"
+	"encoding/hex"
 	"encoding/json"
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
@@ -65,14 +67,14 @@ func GetAllAccounts(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func CanRun(w http.ResponseWriter, r *http.Request) {
+func CanRunLeg(w http.ResponseWriter, r *http.Request) {
 	b, err := ioutil.ReadAll(r.Body)
 	defer r.Body.Close()
 	if err != nil {
 		util.ErrorResponse(w, r, err.Error())
 		return
 	}
-	var bodyUser *models.ReUser
+	var bodyUser *models.LegUserCheck
 	err = json.Unmarshal(b, &bodyUser)
 	if err != nil {
 		util.ErrorResponse(w, r, err.Error())
@@ -91,7 +93,7 @@ func CanRun(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	preresponse, err := controllers.CanRun(bodyUser)
+	preresponse, err := controllers.CanRunLeg(bodyUser)
 	if err != nil {
 		util.ErrorResponse(w, r, err.Error())
 		return
@@ -256,18 +258,70 @@ func GetUserKey(w http.ResponseWriter, r *http.Request) {
 	refreshToken := controllers.RefreshFromUUID(userUuid)
 
 	type rB struct {
-		Uuid  uuid.UUID `json:"uuid"`
-		Token string    `json:"token"`
+		Uuid     uuid.UUID `json:"uuid"`
+		Token    string    `json:"refresh_token"`
+		CheckSum string    `json:"sum"`
 	}
 
+	sum := md5.Sum([]byte(userUuid.String() + refreshToken))
 	response, _ := json.Marshal(rB{
-		Uuid:  userUuid,
-		Token: refreshToken,
+		Uuid:     userUuid,
+		Token:    refreshToken,
+		CheckSum: hex.EncodeToString(sum[:]),
 	})
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Content-Disposition", "attachment; filename=key.qt")
 
+	w.WriteHeader(http.StatusCreated)
+	w.Write(response)
+
+}
+
+func Verify(w http.ResponseWriter, r *http.Request) {
+	b, err := ioutil.ReadAll(r.Body)
+	defer r.Body.Close()
+	if err != nil {
+		util.ErrorResponse(w, r, err.Error())
+		return
+	}
+	var userReq *models.AuthUserReq
+	err = json.Unmarshal(b, &userReq)
+	if err != nil {
+		util.ErrorResponse(w, r, err.Error())
+		return
+	}
+	sum := md5.Sum([]byte(userReq.Uuid.String() + userReq.RefreshToken))
+	if userReq.CheckSum != hex.EncodeToString(sum[:]) {
+		util.ErrorResponse(w, r, util.ErrInvalidSum.Error())
+		return
+	}
+	token, err := controllers.JWTFromRefresh(userReq.RefreshToken)
+	if err != nil || !token.Valid {
+		util.ErrorResponse(w, r, util.ErrToken.Error())
+		return
+	}
+	claims, ok := token.Claims.(*controllers.JwtRefreshClaims)
+	if !ok {
+		util.ErrorResponse(w, r, util.ErrToken.Error())
+		return
+	}
+	uuidT, _ := uuid.Parse(claims.Uuid)
+	userReq.Uuid = uuidT
+
+	authRe, err := controllers.Verify(userReq)
+	if err != nil {
+		util.ErrorResponse(w, r, err.Error())
+		return
+	}
+
+	response, err := json.Marshal(authRe)
+
+	if err != nil {
+		log.Println(err)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	w.Write(response)
 

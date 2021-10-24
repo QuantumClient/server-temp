@@ -20,7 +20,9 @@ var (
 	ErrAccess      = errors.New("you do not have access")
 	ErrCape        = errors.New("undefined cape error")
 	Err404         = errors.New("404 - Not found")
-	ErrToken       = errors.New("bad token")
+	ErrToken       = errors.New("invalid token")
+	ErrUUIDMATCH   = errors.New("UUIDs do not match")
+	ErrInvalidSum  = errors.New("invalid check sum")
 )
 
 func ErrorResponse(w http.ResponseWriter, r *http.Request, reson string) {
