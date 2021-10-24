@@ -5,8 +5,10 @@ import (
 	"backend/models"
 	"backend/util"
 	"crypto/md5"
+	"encoding/base64"
 	"encoding/hex"
 	"encoding/json"
+	"fmt"
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
 	"io/ioutil"
@@ -243,34 +245,27 @@ func SetAccess(w http.ResponseWriter, r *http.Request) {
 
 func GetUserKey(w http.ResponseWriter, r *http.Request) {
 	token, err := controllers.GetToken(r)
-
 	if err != nil {
 		log.Println(err)
 		util.ErrorResponse(w, r, util.ErrToken.Error())
 		return
 	}
 
-	if !token.Claims.(*controllers.JwtCustomClaims).Access {
-		util.ErrorResponse(w, r, util.ErrAccess.Error())
+	key, err := controllers.GenKey(token)
+	if err != nil {
+		util.ErrorResponse(w, r, err.Error())
 		return
 	}
-	userUuid, _ := uuid.Parse(mux.Vars(r)["uuid"])
-	refreshToken := controllers.RefreshFromUUID(userUuid)
+	var response []byte
+	if _, ok := r.URL.Query()["json"]; ok {
+		response, _ = json.Marshal(key)
+		w.Header().Set("Content-Type", "application/json")
+	} else {
+		response = []byte(base64.StdEncoding.EncodeToString([]byte(fmt.Sprintf("%s\n%s\n%s", key.Uuid, key.RefreshToken, key.CheckSum))))
+		w.Header().Set("Content-Type", "application/text")
 
-	type rB struct {
-		Uuid     uuid.UUID `json:"uuid"`
-		Token    string    `json:"refresh_token"`
-		CheckSum string    `json:"sum"`
 	}
 
-	sum := md5.Sum([]byte(userUuid.String() + refreshToken))
-	response, _ := json.Marshal(rB{
-		Uuid:     userUuid,
-		Token:    refreshToken,
-		CheckSum: hex.EncodeToString(sum[:]),
-	})
-
-	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Content-Disposition", "attachment; filename=key.qt")
 
 	w.WriteHeader(http.StatusCreated)

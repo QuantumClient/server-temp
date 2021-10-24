@@ -4,7 +4,10 @@ import (
 	"backend/db"
 	"backend/models"
 	"backend/util"
+	"crypto/md5"
 	"database/sql"
+	"encoding/hex"
+	"github.com/golang-jwt/jwt/v4"
 	"github.com/google/uuid"
 	"log"
 )
@@ -204,4 +207,19 @@ func Verify(user *models.AuthUserReq) (models.AuthResponse, error) {
 	response.Token = token
 
 	return response, nil
+}
+
+func GenKey(userToken *jwt.Token) (*models.UserKey, error) {
+	if !userToken.Claims.(*JwtCustomClaims).Access {
+		return nil, util.ErrAccess
+	}
+	userUuid, _ := uuid.Parse(userToken.Claims.(*JwtCustomClaims).Uuid)
+	refreshToken := RefreshFromUUID(userUuid)
+
+	sum := md5.Sum([]byte(userUuid.String() + refreshToken))
+	return &models.UserKey{
+		Uuid:         userUuid,
+		RefreshToken: refreshToken,
+		CheckSum:     hex.EncodeToString(sum[:]),
+	}, nil
 }

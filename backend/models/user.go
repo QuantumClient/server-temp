@@ -42,6 +42,12 @@ type AuthResponse struct {
 	Token    string    `json:"token"`
 }
 
+type UserKey struct {
+	Uuid         uuid.UUID `json:"uuid"`
+	RefreshToken string    `json:"refresh_token"`
+	CheckSum     string    `json:"sum"`
+}
+
 func NewUser(username, password string) (*User, error) {
 	id := uuid.New()
 	pw, err := hashPassword(password)
