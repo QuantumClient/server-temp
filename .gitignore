@@ -90,7 +90,7 @@ sw.*
 *.swp
 
 # sql
-.sql
+*.sql
 
 # database
 db

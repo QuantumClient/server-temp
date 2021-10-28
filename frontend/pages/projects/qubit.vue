@@ -1,7 +1,7 @@
 <template>
   <div class="container_custom">
     <a class="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 bg-coolGray-50">
-      <img src="~/assets/images/Qubit-1.png" alt="Qubit Minecraft Client" class="m-4 rounded sm:h-96 lg:col-span-7 shadow-md rounded-2xl ">
+      <img src="~/assets/images/Qubit-1.png" alt="Qubit Minecraft Client" class=" m-4 rounded sm:h-96 lg:col-span-7 shadow-md rounded-2xl ">
       <div class="p-6 space-y-2 lg:col-span-5 text-contrast">
         <h3 class="text-2xl font-semibold sm:text-4xl ">Qubit</h3>
         <span class="text-s text-colors-coolGray-600">{{ project.version }}</span>

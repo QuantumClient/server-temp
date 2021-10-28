@@ -286,6 +286,7 @@ func Verify(w http.ResponseWriter, r *http.Request) {
 		util.ErrorResponse(w, r, err.Error())
 		return
 	}
+
 	sum := md5.Sum([]byte(userReq.Uuid.String() + userReq.RefreshToken))
 	if userReq.CheckSum != hex.EncodeToString(sum[:]) {
 		util.ErrorResponse(w, r, util.ErrInvalidSum.Error())

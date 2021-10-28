@@ -3,7 +3,6 @@
     <Download />
     <Project :name="this.name" />
     <Capes />
-    <h2 class="subtitle text-contrast"> If you don't have private access being here is pointless.</h2>
   </div>
 </template>
 

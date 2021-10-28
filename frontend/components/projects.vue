@@ -13,10 +13,13 @@
             </nuxt-link>
           </div>
           <div class="flex flex-col justify-center w-full px-8 mx-6 my-12 text-center rounded-md md:w-96 lg:w-80 xl:w-64 bg-contrast shadow-md transform duration-500 hover:-translate-y-1">
-            <div class="my-4">
-              <p class="text-xl font-semibold leading-snug">Quantum</p>
-              <p>Our top of the line private client.</p>
-            </div>
+           <nuxt-link to="/projects/quantum">
+             <div class="my-4">
+               <p class="text-xl font-semibold leading-snug">Quantum</p>
+               <p>Our top of the line private client.</p>
+             </div>
+           </nuxt-link>
+
           </div>
           <div class="flex flex-col justify-center w-full px-8 mx-6 my-12 text-center rounded-md md:w-96 lg:w-80 xl:w-64 bg-contrast shadow-md transform duration-500 hover:-translate-y-1">
           <div class="my-4">

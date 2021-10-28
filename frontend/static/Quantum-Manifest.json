@@ -1,0 +1,5406 @@
+{
+  "Modules": {
+    "Combat": [
+      {
+        "Name": "AimBot",
+        "Description": "Aims your camera automatically at entities inside the specified range.",
+        "Settings": [
+          {
+            "name": "Range",
+            "description": "Range for targeting",
+            "type": "Number",
+            "value": 8.0,
+            "max": 20.0,
+            "min": 0.5
+          }
+        ]
+      },
+      {
+        "Name": "AntiWasp",
+        "Description": "Places blocks below wasps, blocking them from getting to you.",
+        "Settings": []
+      },
+      {
+        "Name": "Aura",
+        "Description": "Automatically attacks various entities.",
+        "Settings": [
+          {
+            "name": "Range",
+            "description": "Range to look for targets",
+            "type": "Number",
+            "value": 4.35,
+            "max": 6.0,
+            "min": 1.0
+          },
+          {
+            "name": "Mode",
+            "description": "Mode to aura in",
+            "type": "Enum",
+            "value": "Switch",
+            "values": [
+              "Single",
+              "Switch"
+            ]
+          },
+          {
+            "name": "Walls",
+            "description": "Hit through walls",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Check32k",
+            "description": "Check if the item has \u003e Sharp 5",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "Wait",
+            "description": "Wait fo attack cooldown",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "SwitchSeconds",
+            "description": "Seconds to switch entities",
+            "type": "Number",
+            "value": 1.5,
+            "max": 8.0,
+            "min": 1.0
+          },
+          {
+            "name": "CPS",
+            "description": "Clicks per second, 1.6 is sword default",
+            "type": "Number",
+            "value": 1.6,
+            "max": 50.0,
+            "min": 0.8
+          },
+          {
+            "name": "LessPackets",
+            "description": "Minimizes packets while rotating.",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Render",
+            "description": "Should render head rot",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Render",
+                "description": "Yo man",
+                "type": "Boolean",
+                "value": true
+              }
+            ]
+          },
+          {
+            "name": "Players",
+            "description": "Should attack players",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Hostile",
+            "description": "Should attack hostiles",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Animals",
+            "description": "Should attack animals",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Animals",
+                "description": "Should attack animals with an owner",
+                "type": "Boolean",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "Fish",
+            "description": "Should attack Fish",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "AutoBlock",
+            "description": "Block automatically",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "AutoBlock",
+                "description": "Stop sprint while autoblocking. Prevents bans.",
+                "type": "Boolean",
+                "value": true
+              }
+            ]
+          },
+          {
+            "name": "ToggleOnJoin",
+            "description": "Toggle when joining worlds",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "Auto32k",
+        "Description": "Automatically grabs a superweapon from a shulker box into your hotbar.",
+        "Settings": [
+          {
+            "name": "Meta",
+            "description": "",
+            "type": "Enum",
+            "value": "Dispenser",
+            "values": [
+              "Dispenser",
+              "Hopper"
+            ]
+          },
+          {
+            "name": "Range",
+            "description": "",
+            "type": "Number",
+            "value": 5.0,
+            "max": 8.0,
+            "min": 0.0
+          },
+          {
+            "name": "Aura",
+            "description": "Enable and set aura mode.",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "AutoArmor",
+        "Description": "Automatically equips armor.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "Legit only uses hotbar",
+            "type": "Enum",
+            "value": "Normal",
+            "values": [
+              "Normal",
+              "Legit"
+            ],
+            "subsettings": [
+              {
+                "name": "Mode",
+                "description": "Delay to wait",
+                "type": "Enum",
+                "value": 250,
+                "max": 1000,
+                "min": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "AutoBlock",
+        "Description": "Automatically blocks your sword or shield.",
+        "Settings": [
+          {
+            "name": "Event",
+            "description": "Which event to check on",
+            "type": "Enum",
+            "value": "Attack_event",
+            "values": [
+              "Attack_event",
+              "Tick_event"
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "AutoCity",
+        "Description": "Automatically mines the block at a player\u0027s feet.",
+        "Settings": [
+          {
+            "name": "Range",
+            "description": "Range to look for targets",
+            "type": "Number",
+            "value": 5.0,
+            "max": 7.0,
+            "min": 0.0
+          }
+        ]
+      },
+      {
+        "Name": "AutoCrystal",
+        "Description": "Automatically places crystals and destroys them to damage your enemies.",
+        "Settings": [
+          {
+            "name": "Place",
+            "description": "Place crystals",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Place",
+                "description": "Range for placing",
+                "type": "Boolean",
+                "value": 5.0,
+                "max": 8.0,
+                "min": 0.0
+              },
+              {
+                "name": "Place",
+                "description": "Range for placing through walls",
+                "type": "Boolean",
+                "value": 3.5,
+                "max": 8.0,
+                "min": 0.0
+              },
+              {
+                "name": "Place",
+                "description": "Place Delay",
+                "type": "Boolean",
+                "value": 2.0,
+                "max": 20.0,
+                "min": 0.0
+              },
+              {
+                "name": "Place",
+                "description": "Minimum damage to inflict",
+                "type": "Boolean",
+                "value": 7.0,
+                "max": 36.0,
+                "min": 0.0
+              },
+              {
+                "name": "Place",
+                "description": "Maximum damage to selfhurt",
+                "type": "Boolean",
+                "value": 8.0,
+                "max": 36.0,
+                "min": 0.0
+              },
+              {
+                "name": "Place",
+                "description": "Place with packets",
+                "type": "Boolean",
+                "value": true
+              }
+            ]
+          },
+          {
+            "name": "Break",
+            "description": "Break crystals",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Break",
+                "description": "Whether to swing or not",
+                "type": "Boolean",
+                "value": false
+              },
+              {
+                "name": "Break",
+                "description": "Kills the crystal, makes it look faster",
+                "type": "Boolean",
+                "value": true
+              },
+              {
+                "name": "Break",
+                "description": "Break Delay",
+                "type": "Boolean",
+                "value": 2.0,
+                "max": 20.0,
+                "min": 0.0
+              },
+              {
+                "name": "Break",
+                "description": "Tries to hit",
+                "type": "Boolean",
+                "value": 2.0,
+                "max": 10.0,
+                "min": 1.0
+              },
+              {
+                "name": "Break",
+                "description": "Range for breaking",
+                "type": "Boolean",
+                "value": 5.0,
+                "max": 8.0,
+                "min": 0.0
+              }
+            ]
+          },
+          {
+            "name": "1.13",
+            "description": "Place in 1x1x1 holes",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "AutoSwitch",
+            "description": "How to switch to crystals",
+            "type": "Enum",
+            "value": "Ghost_hand",
+            "values": [
+              "Ghost_hand",
+              "Hotbar",
+              "Off_hand",
+              "None"
+            ]
+          },
+          {
+            "name": "Pause",
+            "description": "Wait while we are doing thing",
+            "type": "Enum",
+            "value": "Both",
+            "values": [
+              "Eating",
+              "Mining",
+              "Both",
+              "None"
+            ]
+          },
+          {
+            "name": "AntiDesync",
+            "description": "Attempt to sync with server",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "AutoLog",
+        "Description": "Automatically logs yourself out at the specified events.",
+        "Settings": [
+          {
+            "name": "Health",
+            "description": "Health to log at",
+            "type": "Number",
+            "value": 5.0,
+            "max": 19.0,
+            "min": 1.0
+          },
+          {
+            "name": "VisualRange",
+            "description": "Log if enemy enters visual range",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "AutoTotem",
+        "Description": "Automatically places a totem in your offhand when needed.",
+        "Settings": []
+      },
+      {
+        "Name": "AutoTrap",
+        "Description": "Automatically places obsidian around your enemies.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "Layout of blocks to place",
+            "type": "Enum",
+            "value": "Bed",
+            "values": [
+              "Bed",
+              "Full"
+            ]
+          },
+          {
+            "name": "Disables",
+            "description": "Disables when done",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Range",
+            "description": "Range to look for targets",
+            "type": "Number",
+            "value": 5.0,
+            "max": 7.0,
+            "min": 0.0
+          },
+          {
+            "name": "BPS",
+            "description": "How many blocks to place per second",
+            "type": "Number",
+            "value": 1.0,
+            "max": 6.0,
+            "min": 0.0
+          }
+        ]
+      },
+      {
+        "Name": "BedAura",
+        "Description": "Automatically places/destroys beds around your enemies to damage them.",
+        "Settings": [
+          {
+            "name": "Place",
+            "description": "Place beds",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Place",
+                "description": "Time to wait before placing",
+                "type": "Boolean",
+                "value": 0.5,
+                "max": 4.0,
+                "min": 0.0
+              },
+              {
+                "name": "Place",
+                "description": "Range to place in",
+                "type": "Boolean",
+                "value": 5.0,
+                "max": 8.0,
+                "min": 0.0
+              }
+            ]
+          },
+          {
+            "name": "Explode",
+            "description": "Explode beds",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Explode",
+                "description": "Time to wait before exploding",
+                "type": "Boolean",
+                "value": 0.5,
+                "max": 4.0,
+                "min": 0.0
+              },
+              {
+                "name": "Explode",
+                "description": "Range to explode in",
+                "type": "Boolean",
+                "value": 5.0,
+                "max": 8.0,
+                "min": 0.0
+              },
+              {
+                "name": "Explode",
+                "description": "Attempt to not blow yourself up",
+                "type": "Boolean",
+                "value": true
+              },
+              {
+                "name": "Explode",
+                "description": "Maximum damage allowed to self inflict",
+                "type": "Boolean",
+                "value": 8.0,
+                "max": 36.0,
+                "min": 0.0
+              }
+            ]
+          },
+          {
+            "name": "Chat",
+            "description": "Chat message to explain Quantum\u0027s failures",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "Criticals",
+        "Description": "Attempts to make every attack a critical.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "Mode to use",
+            "type": "Enum",
+            "value": "Normal",
+            "values": [
+              "Normal",
+              "$2b2t",
+              "Ncp",
+              "Bypass"
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "HitWait",
+        "Description": "Cancels hits if they will miss or not do full damage.",
+        "Settings": [
+          {
+            "name": "Percentage",
+            "description": "",
+            "type": "Number",
+            "value": 0.98,
+            "max": 1.0,
+            "min": 0.0
+          }
+        ]
+      },
+      {
+        "Name": "Hitboxes",
+        "Description": "Enlarges enemy hitboxes.",
+        "Settings": [
+          {
+            "name": "Expansion",
+            "description": "",
+            "type": "Number",
+            "value": 1.0,
+            "max": 3.0,
+            "min": 0.01
+          },
+          {
+            "name": "Range",
+            "description": "",
+            "type": "Number",
+            "value": 3.1,
+            "max": 6.0,
+            "min": 3.0
+          }
+        ]
+      },
+      {
+        "Name": "OffHand",
+        "Description": "Puts select items in your offhand.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "What to put in off hand",
+            "type": "Enum",
+            "value": "Golden_apple",
+            "values": [
+              "Golden_apple",
+              "End_crystal"
+            ]
+          },
+          {
+            "name": "Health",
+            "description": "When to go to a totem",
+            "type": "Number",
+            "value": 10.0,
+            "max": 20.0,
+            "min": 0.0
+          }
+        ]
+      },
+      {
+        "Name": "Reach",
+        "Description": "Extends your reach.",
+        "Settings": [
+          {
+            "name": "Distance",
+            "description": "How far to reach",
+            "type": "Number",
+            "value": 4.0,
+            "max": 8.0,
+            "min": 0.0
+          }
+        ]
+      },
+      {
+        "Name": "Surround",
+        "Description": "Surrounds your feet with obsidian.",
+        "Settings": [
+          {
+            "name": "ToggleJump",
+            "description": "Toggle on jump",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Toggle",
+            "description": "Toggles once placed",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "Center",
+            "description": "Center you",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "BPS",
+            "description": "Blocks to place per second",
+            "type": "Number",
+            "value": 1.0,
+            "max": 6.0,
+            "min": 0.0
+          }
+        ]
+      }
+    ],
+    "Misc": [
+      {
+        "Name": "Alerts",
+        "Description": "Alerts you for various events.",
+        "Settings": [
+          {
+            "name": "VisualRange",
+            "description": "Notify who enters and leaves our vision",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Whispers",
+            "description": "Notify if someone whispers u",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Whispers",
+                "description": "Play experince orb sound",
+                "type": "Boolean",
+                "value": true
+              }
+            ]
+          },
+          {
+            "name": "ChatMention",
+            "description": "Notify if someone is talking about u",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "ChatMention",
+                "description": "Play experince orb sound",
+                "type": "Boolean",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "AntiHaste",
+        "Description": "Removes your haste. (If you have a ghost haste effect it\u0027ll go away.)",
+        "Settings": []
+      },
+      {
+        "Name": "AntiPacketSpam",
+        "Description": "Slows down outgoing packets.",
+        "Settings": [
+          {
+            "name": "TickDelay",
+            "description": "Tick delay between packets",
+            "type": "Number",
+            "value": 10,
+            "max": 1000,
+            "min": 1
+          }
+        ]
+      },
+      {
+        "Name": "AutoBreed",
+        "Description": "Automatically breeds animals within the specified range.",
+        "Settings": [
+          {
+            "name": "Range",
+            "description": "Range to look for targets",
+            "type": "Number",
+            "value": 2,
+            "max": 6,
+            "min": 1
+          },
+          {
+            "name": "Packet",
+            "description": "Interact with packet",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "AutoFeed",
+        "Description": "Attempts to feed your horse.",
+        "Settings": [
+          {
+            "name": "Gaps",
+            "description": "Number of gapples to eat",
+            "type": "Number",
+            "value": 2,
+            "max": 4,
+            "min": 1
+          },
+          {
+            "name": "Health",
+            "description": "Health to dismount at",
+            "type": "Number",
+            "value": 10,
+            "max": 28,
+            "min": 5
+          }
+        ]
+      },
+      {
+        "Name": "AutoReconnect",
+        "Description": "Automatically reconnects you after a kick.",
+        "Settings": [
+          {
+            "name": "Delay",
+            "description": "How long to wait",
+            "type": "Number",
+            "value": 2.0,
+            "max": 10.0,
+            "min": 0.0
+          }
+        ]
+      },
+      {
+        "Name": "ChatMods",
+        "Description": "Various chat modifications.",
+        "Settings": [
+          {
+            "name": "CleanChat",
+            "description": "No more cusswords guys!",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "AntiEZ",
+            "description": "Don\u0027t show messages that contain ez",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "AntiDiscord",
+            "description": "Don\u0027t show messages that contain discord.gg",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "GreenText",
+            "description": "Put \u003e infront of all msgs",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "ChatSuffix",
+            "description": "Add string onto every msg",
+            "type": "Boolean",
+            "value": false,
+            "subsettings": [
+              {
+                "name": "ChatSuffix",
+                "description": "String to append",
+                "type": "Boolean",
+                "value": "Quantum 1.6.0"
+              }
+            ]
+          },
+          {
+            "name": "NameHighlight",
+            "description": "Highlight our name",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "FriendNameHighlight",
+            "description": "Highlight friends names",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Timestamp",
+            "description": "Adds timestamp in front (breaks lots of stuff)",
+            "type": "Boolean",
+            "value": false
+          }
+        ]
+      },
+      {
+        "Name": "Disabler",
+        "Description": "Prevents breaking the blocks above you to speed on select NCP builds.",
+        "Settings": [
+          {
+            "name": "ToggleSpeed",
+            "description": "Re-enable speed module upon disable",
+            "type": "Boolean",
+            "value": false,
+            "subsettings": [
+              {
+                "name": "ToggleSpeed",
+                "description": "ms to wait to enable speed after it toggles automatically",
+                "type": "Boolean",
+                "value": 1000,
+                "max": 5000,
+                "min": 0
+              }
+            ]
+          },
+          {
+            "name": "AntiLagBack",
+            "description": "Sets your position to your previous postion after a lagback packet, may not work on newer ACs",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "PreventBreak",
+            "description": "",
+            "type": "Boolean",
+            "value": false,
+            "subsettings": [
+              {
+                "name": "PreventBreak",
+                "description": "",
+                "type": "Boolean",
+                "value": true
+              }
+            ]
+          },
+          {
+            "name": "AutoDC",
+            "description": "Automatically dc on timeout",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "EchestFarmer",
+        "Description": "Farms ender chests for you.",
+        "Settings": [
+          {
+            "name": "Delay",
+            "description": "Timed delay for each place of ender chest",
+            "type": "Number",
+            "value": 1.0,
+            "max": 10.0,
+            "min": 0.0
+          }
+        ]
+      },
+      {
+        "Name": "ElytraReplace",
+        "Description": "Replaces your elytra after it breaks.",
+        "Settings": []
+      },
+      {
+        "Name": "EnderChestPeek",
+        "Description": "Open with enderchest command.",
+        "Settings": []
+      },
+      {
+        "Name": "FriendClick",
+        "Description": "Adds an entity as friend if you click your mouse button while hovering over them.",
+        "Settings": []
+      },
+      {
+        "Name": "HotbarCache",
+        "Description": "Replaces things in your hotbar.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "The mode of refilling to use, refill mode may cause desync",
+            "type": "Enum",
+            "value": "Cache",
+            "values": [
+              "Cache",
+              "Refill"
+            ]
+          },
+          {
+            "name": "Delay",
+            "description": "Time to wait before doing thing",
+            "type": "Number",
+            "value": 1.0,
+            "max": 10.0,
+            "min": 0.0
+          }
+        ]
+      },
+      {
+        "Name": "MountBypass",
+        "Description": "I don\u0027t know what this actually does",
+        "Settings": [
+          {
+            "name": "Active",
+            "description": "Actively cancel the packet",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "Cooldown",
+            "description": "For ec",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "NoHandShake",
+        "Description": "Does literally nothing. :zany_face:",
+        "Settings": []
+      },
+      {
+        "Name": "NoSound",
+        "Description": "Stops certain sounds from playing.",
+        "Settings": [
+          {
+            "name": "Portals",
+            "description": "Nether portal sound",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Elytra",
+            "description": "Elytra fly sound",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "OffAxisAlarm",
+        "Description": "Alarms you if you\u0027re off axis, don\u0027t turn on at 2am.",
+        "Settings": []
+      },
+      {
+        "Name": "QuantumCrypt",
+        "Description": "Send chat messages with encryption that only other quantum users can use.",
+        "Settings": [
+          {
+            "name": "Encrypt",
+            "description": "",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Decrypt",
+            "description": "",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Decrypt",
+                "description": "",
+                "type": "Boolean",
+                "value": "Chat",
+                "values": [
+                  "Chat",
+                  "Alert",
+                  "Both"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "SlowSwing",
+        "Description": "Makes your swing animation slow.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "",
+            "type": "Enum",
+            "value": "Potion",
+            "values": [
+              "Oldflux",
+              "Potion",
+              "Ideaplus",
+              "Timer"
+            ]
+          },
+          {
+            "name": "Multiplier",
+            "description": "",
+            "type": "Number",
+            "value": 0.3,
+            "max": 1.0,
+            "min": 0.1
+          }
+        ]
+      },
+      {
+        "Name": "Spammer",
+        "Description": "Spams chat with the messages at the specified link.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "Mode to use",
+            "type": "Enum",
+            "value": "Linear",
+            "values": [
+              "Linear",
+              "Randomized"
+            ]
+          },
+          {
+            "name": "Delay",
+            "description": "Delay between spams in seconds",
+            "type": "Number",
+            "value": 0.85,
+            "max": 100.0,
+            "min": 0.1
+          },
+          {
+            "name": "URL",
+            "description": "Universal Resource Location, make sure you put /raw. After changing, please toggle and toggle again.",
+            "type": "String",
+            "value": "https://pastebin.com/raw/mNKrpHtB"
+          }
+        ]
+      },
+      {
+        "Name": "Tablist",
+        "Description": "Modifies the tablist.",
+        "Settings": [
+          {
+            "name": "FriendColour",
+            "description": "Colour to highlight, also effects chatmods friendhighlight",
+            "type": "Enum",
+            "value": "§d",
+            "values": [
+              "§0",
+              "§1",
+              "§2",
+              "§3",
+              "§4",
+              "§5",
+              "§6",
+              "§7",
+              "§8",
+              "§9",
+              "§a",
+              "§b",
+              "§c",
+              "§d",
+              "§e",
+              "§f",
+              "§k",
+              "§l",
+              "§m",
+              "§n",
+              "§o",
+              "§r"
+            ]
+          },
+          {
+            "name": "ExtraTab",
+            "description": "Extra people to put on tablist",
+            "type": "Number",
+            "value": 256,
+            "max": 512,
+            "min": 1
+          },
+          {
+            "name": "Modern",
+            "description": "Draw some cool shapes",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Modern",
+                "description": "Time for animation to last",
+                "type": "Boolean",
+                "value": 3,
+                "max": 10,
+                "min": 0
+              },
+              {
+                "name": "Modern",
+                "description": "Slide animation",
+                "type": "Boolean",
+                "value": true
+              },
+              {
+                "name": "Modern",
+                "description": "Scale animation",
+                "type": "Boolean",
+                "value": false
+              },
+              {
+                "name": "Modern",
+                "description": "Render with custom font",
+                "type": "Boolean",
+                "value": true
+              }
+            ]
+          },
+          {
+            "name": "Ping",
+            "description": "Show latency as a number in ms",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Width",
+            "description": "Customise width",
+            "type": "Number",
+            "value": 10,
+            "max": 32,
+            "min": 2
+          },
+          {
+            "name": "QuantumUsers",
+            "description": "Shows Quantum users",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "QuantumUsers",
+                "description": "Appear as offline to other Quantum users",
+                "type": "Boolean",
+                "value": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Movement": [
+      {
+        "Name": "Allah",
+        "Description": "Allows you to walk on water.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "Walk on water, but not make wine.",
+            "type": "Enum",
+            "value": "Solid",
+            "values": [
+              "Solid",
+              "Mixin",
+              "Dolphin"
+            ],
+            "subsettings": [
+              {
+                "name": "Mode",
+                "description": "",
+                "type": "Enum",
+                "value": 0.1,
+                "max": 1.0,
+                "min": 0.0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "Anchor",
+        "Description": "Anchors you to a hole.",
+        "Settings": [
+          {
+            "name": "Speed",
+            "description": "Speed to fall at",
+            "type": "Number",
+            "value": 3.0,
+            "max": 10.0,
+            "min": 0.0
+          }
+        ]
+      },
+      {
+        "Name": "AutoJump",
+        "Description": "Automatically jumps for you.",
+        "Settings": [
+          {
+            "name": "Delay",
+            "description": "Time between jumps",
+            "type": "Number",
+            "value": 500,
+            "max": 2000,
+            "min": 0
+          }
+        ]
+      },
+      {
+        "Name": "AutoWalk",
+        "Description": "Automatically walks forward or backward or sideways, etc.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "How to walk",
+            "type": "Enum",
+            "value": "Simple",
+            "values": [
+              "Simple",
+              "Baritone"
+            ]
+          },
+          {
+            "name": "AutoAlign",
+            "description": "See what highway you\u0027re on and make a decision",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "NoPickaxePause",
+            "description": "See if you have no pickaxe in your hand and pause",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "Player",
+            "description": "Stop if player is near you it stops",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "Y121",
+            "description": "Stop at y 121",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "Loaded",
+            "description": "Stop if chunk in front is not loaded",
+            "type": "Boolean",
+            "value": false
+          }
+        ]
+      },
+      {
+        "Name": "AutoWasp",
+        "Description": "Sets your position to the nearest player\u0027s position.",
+        "Settings": [
+          {
+            "name": "Aura",
+            "description": "Enable KillAura",
+            "type": "Boolean",
+            "value": false
+          }
+        ]
+      },
+      {
+        "Name": "ElytraFly",
+        "Description": "Elytra modifications.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "Mode to use",
+            "type": "Enum",
+            "value": "Boost",
+            "values": [
+              "Boost",
+              "Control",
+              "Ecme",
+              "Packet",
+              "Pause",
+              "Boost_2"
+            ],
+            "subsettings": [
+              {
+                "name": "Mode",
+                "description": "How fast to go",
+                "type": "Enum",
+                "value": 2.0,
+                "max": 10.0,
+                "min": 0.0
+              },
+              {
+                "name": "Mode",
+                "description": "How fast to go down",
+                "type": "Enum",
+                "value": 0.5,
+                "max": 10.0,
+                "min": 0.0
+              },
+              {
+                "name": "Mode",
+                "description": "How fast to accelerate",
+                "type": "Enum",
+                "value": 5.0,
+                "max": 30.0,
+                "min": 1.0
+              },
+              {
+                "name": "Mode",
+                "description": "Limit speed im m/s",
+                "type": "Enum",
+                "value": 49.0,
+                "max": 100.0,
+                "min": 10.0
+              },
+              {
+                "name": "Mode",
+                "description": "Do sneak and space bar work?",
+                "type": "Enum",
+                "value": true
+              },
+              {
+                "name": "Mode",
+                "description": "Do stuff",
+                "type": "Enum",
+                "value": true
+              }
+            ]
+          },
+          {
+            "name": "RocketBoost",
+            "description": "Boost with rockets on lagback",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "AutoTakeOff",
+            "description": "Automatically take off and open your elytra",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "AutoTakeOff",
+                "description": "Only attempt to take off if you are off the ground",
+                "type": "Boolean",
+                "value": false
+              },
+              {
+                "name": "AutoTakeOff",
+                "description": "Use timer to take off",
+                "type": "Boolean",
+                "value": true
+              },
+              {
+                "name": "AutoTakeOff",
+                "description": "Take off timer speed",
+                "type": "Boolean",
+                "value": 0.1,
+                "max": 1.0,
+                "min": 0.01
+              },
+              {
+                "name": "AutoTakeOff",
+                "description": "Better for older servers",
+                "type": "Boolean",
+                "value": false
+              },
+              {
+                "name": "AutoTakeOff",
+                "description": "How many times to jump before flying, if starting on ground",
+                "type": "Boolean",
+                "value": 3,
+                "max": 10,
+                "min": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "EntityPlus",
+        "Description": "Allows you to control entites differently in various ways.",
+        "Settings": [
+          {
+            "name": "EntityControl",
+            "description": "Allows you to ride w/o saddle",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Yaw",
+            "description": "Set vehicle yaw the same as player",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Speed",
+            "description": "Allows you to go fast",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Speed",
+                "description": "Speed you want to speed at for EntitySpeed",
+                "type": "Boolean",
+                "value": 2.0,
+                "max": 10.0,
+                "min": 0.0
+              },
+              {
+                "name": "Speed",
+                "description": "piggy speed when not holding w",
+                "type": "Boolean",
+                "value": 0.5,
+                "max": 10.0,
+                "min": 0.0
+              }
+            ]
+          },
+          {
+            "name": "Fly",
+            "description": "Allows you to fly",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Fly",
+                "description": "How fast to fly",
+                "type": "Boolean",
+                "value": 1.5,
+                "max": 5.0,
+                "min": 0.0
+              },
+              {
+                "name": "Fly",
+                "description": "Attempt to keep at current Y if not going up",
+                "type": "Boolean",
+                "value": true
+              },
+              {
+                "name": "Fly",
+                "description": "How fast you fall",
+                "type": "Boolean",
+                "value": 0.5,
+                "max": 5.0,
+                "min": 0.0
+              }
+            ]
+          },
+          {
+            "name": "Step",
+            "description": "Allows you to go step",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Step",
+                "description": "How much step",
+                "type": "Boolean",
+                "value": 1.0,
+                "max": 2.0,
+                "min": 0.0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "FlatFly",
+        "Description": "Flight in the style of 1.8 clients.",
+        "Settings": [
+          {
+            "name": "BlinkFly",
+            "description": "Blink while flying",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "DamageMode",
+            "description": "The mode to damage in. Old is for pre-1.15 and new is for post-1.14.",
+            "type": "Enum",
+            "value": "Old",
+            "values": [
+              "New",
+              "Old"
+            ]
+          },
+          {
+            "name": "Multiplier",
+            "description": "Should we timer or not?",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "MultSpeed",
+            "description": "The amount to timer.",
+            "type": "Number",
+            "value": 1.8,
+            "max": 3.0,
+            "min": 0.1
+          },
+          {
+            "name": "MultTime",
+            "description": "The amount of time to timer.",
+            "type": "Number",
+            "value": 1190,
+            "max": 3000,
+            "min": 100
+          },
+          {
+            "name": "Speed",
+            "description": "The actual speed.",
+            "type": "Number",
+            "value": 1.0,
+            "max": 1.0,
+            "min": 0.5
+          }
+        ]
+      },
+      {
+        "Name": "Fly",
+        "Description": "Vanilla fly",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "Only creative currently",
+            "type": "Enum",
+            "value": "Creative",
+            "values": [
+              "Creative",
+              "Static"
+            ]
+          },
+          {
+            "name": "Speed",
+            "description": "Speed to fly at",
+            "type": "Number",
+            "value": 1.2,
+            "max": 2.0,
+            "min": 0.1
+          },
+          {
+            "name": "Bypass",
+            "description": "Bypass stuff.",
+            "type": "Boolean",
+            "value": false,
+            "subsettings": [
+              {
+                "name": "Bypass",
+                "description": "Only fly if Elytra wings are open",
+                "type": "Boolean",
+                "value": false
+              },
+              {
+                "name": "Bypass",
+                "description": "Bypass vanilla anticheat",
+                "type": "Boolean",
+                "value": true
+              },
+              {
+                "name": "Bypass",
+                "description": "Waits until you take damage to fly",
+                "type": "Boolean",
+                "value": false
+              },
+              {
+                "name": "Bypass",
+                "description": "Pauses velo every so often",
+                "type": "Boolean",
+                "value": false
+              },
+              {
+                "name": "Bypass",
+                "description": "Enable Bob module if not already enabled",
+                "type": "Boolean",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "LongJump",
+        "Description": "Allows you to jump in the long variety, auto-disables when on ground again.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "",
+            "type": "Enum",
+            "value": "Old_ncp",
+            "values": [
+              "Old_ncp",
+              "Cubecraft",
+              "Custom",
+              "Legacy"
+            ],
+            "subsettings": [
+              {
+                "name": "Mode",
+                "description": "",
+                "type": "Enum",
+                "value": true
+              },
+              {
+                "name": "Mode",
+                "description": "",
+                "type": "Enum",
+                "value": 1.9,
+                "max": 4.0,
+                "min": 0.1
+              },
+              {
+                "name": "Mode",
+                "description": "",
+                "type": "Enum",
+                "value": 1.0,
+                "max": 5.0,
+                "min": 0.05
+              },
+              {
+                "name": "Mode",
+                "description": "",
+                "type": "Enum",
+                "value": 1.0,
+                "max": 5.0,
+                "min": 0.05
+              }
+            ]
+          },
+          {
+            "name": "Toggle",
+            "description": "",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Timer",
+            "description": "",
+            "type": "Number",
+            "value": 0.66,
+            "max": 2.0,
+            "min": 0.1
+          },
+          {
+            "name": "Damage",
+            "description": "",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Damage",
+                "description": "",
+                "type": "Boolean",
+                "value": "Old",
+                "values": [
+                  "New",
+                  "Old"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "NoSlow",
+        "Description": "Makes various items and blocks not slow you.",
+        "Settings": [
+          {
+            "name": "Items",
+            "description": "Don\u0027t slow down when eating etc",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Blocks",
+            "description": "Don\u0027t slow down on soul sand etc",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Mode",
+            "description": "Mode to use.",
+            "type": "Enum",
+            "value": "Simple",
+            "values": [
+              "Simple",
+              "Advanced"
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "SafeWalk",
+        "Description": "Makes you not walk off blocks.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "Mode to use",
+            "type": "Enum",
+            "value": "Event",
+            "values": [
+              "Event",
+              "Legit"
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "Speed",
+        "Description": "Makes you go fast.",
+        "Settings": [
+          {
+            "name": "Speed",
+            "description": "Speed to speed at",
+            "type": "Number",
+            "value": 1.25,
+            "max": 6.0,
+            "min": 0.01
+          },
+          {
+            "name": "Special",
+            "description": "Special",
+            "type": "Boolean",
+            "value": false,
+            "subsettings": [
+              {
+                "name": "Special",
+                "description": "Mode to hop",
+                "type": "Boolean",
+                "value": "Hop",
+                "values": [
+                  "Hop",
+                  "Low",
+                  "Factorize",
+                  "Pause",
+                  "Novo",
+                  "Strafe"
+                ]
+              },
+              {
+                "name": "Special",
+                "description": "How fast to multiply",
+                "type": "Boolean",
+                "value": 1.025,
+                "max": 3.0,
+                "min": 0.0
+              },
+              {
+                "name": "Special",
+                "description": "When to reset multiplication, in the units of the first setting",
+                "type": "Boolean",
+                "value": 0.85,
+                "max": 6.0,
+                "min": 0.01
+              },
+              {
+                "name": "Special",
+                "description": "Reset factorization on lagback",
+                "type": "Boolean",
+                "value": false
+              },
+              {
+                "name": "Special",
+                "description": "This is essentially how fast your factor gets applied",
+                "type": "Boolean",
+                "value": 7,
+                "max": 15,
+                "min": 1
+              },
+              {
+                "name": "Special",
+                "description": "Sub-mode that the Novo mode should use.",
+                "type": "Boolean",
+                "value": "Fast",
+                "values": [
+                  "Safe",
+                  "Fast",
+                  "Medium"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "AutoSprint",
+            "description": "Sprint automatically",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "ToggleOnLagBack",
+            "description": "",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "StopUp2",
+            "description": "Stop when you dont\u0027 have block above head",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "Sneak",
+            "description": "Do we activate on sneak?",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "Slippy",
+            "description": "Makes blocks slippy, potentially bypasses some ncp flavors?",
+            "type": "Boolean",
+            "value": false,
+            "subsettings": [
+              {
+                "name": "Slippy",
+                "description": "Amount to slip.",
+                "type": "Boolean",
+                "value": 0.98,
+                "max": 6.0,
+                "min": 0.25
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "Sprint",
+        "Description": "Makes you automatically sprint.",
+        "Settings": []
+      },
+      {
+        "Name": "Step",
+        "Description": "Makes your stepheight higher.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "Mode to use",
+            "type": "Enum",
+            "value": "Vanilla",
+            "values": [
+              "Vanilla",
+              "Auto_jump"
+            ],
+            "subsettings": [
+              {
+                "name": "Mode",
+                "description": "How high to step up",
+                "type": "Enum",
+                "value": 1.0,
+                "max": 4.0,
+                "min": 1.0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "TargetStrafe",
+        "Description": "Makes you strafe around entities.",
+        "Settings": [
+          {
+            "name": "Radius",
+            "description": "Radius to strafe",
+            "type": "Number",
+            "value": 2.0,
+            "max": 4.0,
+            "min": 0.1
+          },
+          {
+            "name": "Hold Space",
+            "description": "Hold space to activate (fortnite)",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Render",
+            "description": "Render a circle around target",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Render",
+                "description": "Colour of ",
+                "type": "Boolean",
+                "value": "Rainbow",
+                "values": [
+                  "Rainbow",
+                  "White"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Thirdperson",
+            "description": "Set camera to thirdperson while strafing",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Thirdperson",
+                "description": "Distance to set camera at",
+                "type": "Boolean",
+                "value": 2.0,
+                "max": 10.0,
+                "min": 1.0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "Velocity",
+        "Description": "Cancels serverside added velocity.",
+        "Settings": [
+          {
+            "name": "Horizontal",
+            "description": "",
+            "type": "Number",
+            "value": 0.0,
+            "max": 100.0,
+            "min": 0.0
+          },
+          {
+            "name": "Vertical",
+            "description": "",
+            "type": "Number",
+            "value": 0.0,
+            "max": 100.0,
+            "min": 0.0
+          }
+        ]
+      }
+    ],
+    "Player": [
+      {
+        "Name": "AntiFall",
+        "Description": "Don\u0027t fall",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "Old is for pre-1.15 and new is for post-1.14",
+            "type": "Enum",
+            "value": "New",
+            "values": [
+              "New",
+              "Old"
+            ]
+          },
+          {
+            "name": "Height",
+            "description": "Height to active at",
+            "type": "Number",
+            "value": 3.0,
+            "max": 10.0,
+            "min": 1.0
+          },
+          {
+            "name": "Delay",
+            "description": "Timeout between lagbacks",
+            "type": "Number",
+            "value": 1,
+            "max": 10,
+            "min": 0
+          }
+        ]
+      },
+      {
+        "Name": "AntiHunger",
+        "Description": "Makes you lose hunger slower.",
+        "Settings": []
+      },
+      {
+        "Name": "AutoEat",
+        "Description": "Automatically eat when needed.",
+        "Settings": [
+          {
+            "name": "Hunger",
+            "description": "Hunger to eat at",
+            "type": "Number",
+            "value": 16,
+            "max": 19,
+            "min": 1
+          },
+          {
+            "name": "AutoGap",
+            "description": "Gap when no fire res",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Offhand",
+            "description": "",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "AutoFish",
+        "Description": "Automatically fishes for you.",
+        "Settings": [
+          {
+            "name": "Delay",
+            "description": "Time between recasting",
+            "type": "Number",
+            "value": 5,
+            "max": 10,
+            "min": 1
+          },
+          {
+            "name": "DisableVelocity",
+            "description": "Velocity messes up fishing bobber",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "AutoMend",
+        "Description": "Automatically mends your armor.",
+        "Settings": []
+      },
+      {
+        "Name": "AutoMine",
+        "Description": "Automatically makes you mine.",
+        "Settings": []
+      },
+      {
+        "Name": "AutoMount",
+        "Description": "Automatically mounts entities for you.",
+        "Settings": [
+          {
+            "name": "Delay",
+            "description": "Time to wait before mounting",
+            "type": "Number",
+            "value": 1.0,
+            "max": 10.0,
+            "min": 0.0
+          },
+          {
+            "name": "Range",
+            "description": "Range to look for targets",
+            "type": "Number",
+            "value": 4,
+            "max": 10,
+            "min": 0
+          }
+        ]
+      },
+      {
+        "Name": "AutoRespawn",
+        "Description": "Automatically respawns for you.",
+        "Settings": [
+          {
+            "name": "Chat",
+            "description": "Chat msg of death coords",
+            "type": "Boolean",
+            "value": false
+          }
+        ]
+      },
+      {
+        "Name": "AutoSteal",
+        "Description": "Automatically steals chests for you.",
+        "Settings": [
+          {
+            "name": "AutoOpen",
+            "description": "Automatically open chests, reccomended to use inventory move",
+            "type": "Boolean",
+            "value": false,
+            "subsettings": [
+              {
+                "name": "AutoOpen",
+                "description": "Delay before opening chests",
+                "type": "Boolean",
+                "value": 100,
+                "max": 500,
+                "min": 0
+              }
+            ]
+          },
+          {
+            "name": "Delay",
+            "description": "Delay before doing each steal",
+            "type": "Number",
+            "value": 100,
+            "max": 500,
+            "min": 0
+          },
+          {
+            "name": "Modify",
+            "description": "Modify container screens",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Silent",
+            "description": "Don\u0027t even show the screen",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "Smart",
+            "description": "Only steal better items",
+            "type": "Boolean",
+            "value": false
+          }
+        ]
+      },
+      {
+        "Name": "AutoSwitcher",
+        "Description": "Automatically switches your selected slot for you.",
+        "Settings": [
+          {
+            "name": "Item",
+            "description": "Which item to switch to",
+            "type": "Enum",
+            "value": "Pickaxe",
+            "values": [
+              "Pickaxe",
+              "Crystal",
+              "Gapple",
+              "Snowball"
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "AutoTool",
+        "Description": "Automatically selects the correct tool.",
+        "Settings": [
+          {
+            "name": "NotOnSword",
+            "description": "Don\u0027t change when using a sword.",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "AutoTunnel",
+        "Description": "Do not confuse with baritone",
+        "Settings": [
+          {
+            "name": "Baritone",
+            "description": "Use baritone to tunnel",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "PauseAutowalk",
+            "description": "Pause autowalk while mining",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Width",
+            "description": "How wide to make the tunnel",
+            "type": "Number",
+            "value": 1,
+            "max": 5,
+            "min": 1
+          },
+          {
+            "name": "Height",
+            "description": "How tall to make the tunnel",
+            "type": "Number",
+            "value": 2,
+            "max": 5,
+            "min": 2
+          },
+          {
+            "name": "Tracer",
+            "description": "Draws tracer to current block",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "Blink",
+        "Description": "Stops you from sending move packets.",
+        "Settings": [
+          {
+            "name": "Fakeplayer",
+            "description": "Spawns a fakeplayer",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Breadcrumbs",
+            "description": "Render breadcrumbs",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "ChestSwap",
+        "Description": "Swaps your chestplate for elytra and vice versa.",
+        "Settings": []
+      },
+      {
+        "Name": "EntityMine",
+        "Description": "Makes you mine through entities.",
+        "Settings": []
+      },
+      {
+        "Name": "FakePlayer",
+        "Description": "Spawns a fake player for you.",
+        "Settings": []
+      },
+      {
+        "Name": "InstantEat",
+        "Description": "Attempts to make you eat instantly.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "Mode to use",
+            "type": "Enum",
+            "value": "Instant",
+            "values": [
+              "Instant",
+              "Interact"
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "InvManager",
+        "Description": "Sorts your inventory.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "InvManager method.",
+            "type": "Enum",
+            "value": "Basic",
+            "values": [
+              "Basic",
+              "Open_inv"
+            ]
+          },
+          {
+            "name": "Delay",
+            "description": "Inventory clicks delay.",
+            "type": "Number",
+            "value": 1,
+            "max": 10,
+            "min": 1
+          },
+          {
+            "name": "Clean",
+            "description": "Cleans your inventory for you.",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "MaxBlocks",
+            "description": "Max blocks allowed in your inventory.",
+            "type": "Number",
+            "value": 3,
+            "max": 6,
+            "min": 1
+          },
+          {
+            "name": "Food",
+            "description": "Clean food. Keeps Golden Apples.",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "MaxFood",
+            "description": "Max food items allowed in your inventory.",
+            "type": "Number",
+            "value": 3,
+            "max": 6,
+            "min": 1
+          },
+          {
+            "name": "Bypass",
+            "description": "Delay between actions",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "LagBackMods",
+        "Description": "Makes lagback packets not as annoying.",
+        "Settings": [
+          {
+            "name": "Yaw/Pitch",
+            "description": "Make lagbacks not change yaw and pitch.",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Position",
+            "description": "Set the packet\u0027s position to your current position.",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "NoFall",
+        "Description": "Attempts to cancel fall damage.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "Mode to use",
+            "type": "Enum",
+            "value": "Simple",
+            "values": [
+              "Packet",
+              "Simple",
+              "Bucket"
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "NoSwing",
+        "Description": "Stops you from sending swing packets.",
+        "Settings": [
+          {
+            "name": "Animation",
+            "description": "Cancel the animation",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "Packet",
+            "description": "Cancel the packet",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "OffhandSwing",
+        "Description": "Makes you swing with your offhand.",
+        "Settings": []
+      },
+      {
+        "Name": "Portals",
+        "Description": "Allows you to open screens in portals.",
+        "Settings": []
+      },
+      {
+        "Name": "SpeedMine",
+        "Description": "Makes you mine fast.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "Mode to use",
+            "type": "Enum",
+            "value": "Haste",
+            "values": [
+              "Haste",
+              "Packet",
+              "Packet_w_target",
+              "Instant",
+              "Double"
+            ],
+            "subsettings": [
+              {
+                "name": "Mode",
+                "description": "Render target blocks",
+                "type": "Enum",
+                "value": true
+              },
+              {
+                "name": "Mode",
+                "description": "Remove targets that go out of range",
+                "type": "Enum",
+                "value": 5.0,
+                "max": 10.0,
+                "min": 1.0
+              },
+              {
+                "name": "Mode",
+                "description": "Send packets until the block is broken",
+                "type": "Enum",
+                "value": true
+              }
+            ]
+          },
+          {
+            "name": "AutoPick",
+            "description": "Set mainhand as pick",
+            "type": "Enum",
+            "value": "Off",
+            "values": [
+              "Off",
+              "Switch",
+              "Ghost_hand"
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "SpinBot",
+        "Description": "Makes you spin.",
+        "Settings": [
+          {
+            "name": "Pitch",
+            "description": "Set pitch (skeet.cc)",
+            "type": "Enum",
+            "value": "None",
+            "values": [
+              "Up",
+              "Down",
+              "None"
+            ]
+          },
+          {
+            "name": "Mode",
+            "description": "Head mode is clientside",
+            "type": "Enum",
+            "value": "Full",
+            "values": [
+              "Full",
+              "Head",
+              "Head_and_body"
+            ]
+          },
+          {
+            "name": "Speed",
+            "description": "Speed to spin at (this might be broken)",
+            "type": "Number",
+            "value": 20.0,
+            "max": 50.0,
+            "min": 0.0
+          }
+        ]
+      },
+      {
+        "Name": "Yaw",
+        "Description": "Locks your camera.",
+        "Settings": [
+          {
+            "name": "AutoAlign",
+            "description": "Automatically determines highway and snaps yaw",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "UseYaw",
+            "description": "Snaps yaw based on stuff and stuff",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "Yaw",
+            "description": "What angle to snap to, 1 \u003d 45, 2 \u003d 30, 3 \u003d 15, 4 \u003d 90",
+            "type": "Number",
+            "value": 1,
+            "max": 1,
+            "min": 4
+          },
+          {
+            "name": "Pitch",
+            "description": "Set pitch at current pitch",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Lock",
+            "description": "Cancel all mouse input",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "Render": [
+      {
+        "Name": "Animations",
+        "Description": "Various animations from old minecraft and other utility mods.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "Whether to only activate on swing or to not",
+            "type": "Enum",
+            "value": "Normal",
+            "values": [
+              "Normal",
+              "Never"
+            ]
+          },
+          {
+            "name": "1.7 Eat",
+            "description": "Old eating animation",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "1.7 Sneak",
+            "description": "Old sneak animation",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "MultiTask",
+            "description": "Swing while eating (client-side)",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "Animations",
+            "description": "Animations that animate.",
+            "type": "Boolean",
+            "value": false,
+            "subsettings": [
+              {
+                "name": "Animations",
+                "description": "Animate during tool swings",
+                "type": "Boolean",
+                "value": false
+              },
+              {
+                "name": "Animations",
+                "description": "Animate while using any item",
+                "type": "Boolean",
+                "value": false
+              },
+              {
+                "name": "Animations",
+                "description": "Blocking",
+                "type": "Boolean",
+                "value": "Vanilla_2",
+                "values": [
+                  "New_tap",
+                  "Vanilla",
+                  "Vanilla_2",
+                  "Moon",
+                  "Swirl",
+                  "Item_angle",
+                  "Exhi",
+                  "Flux",
+                  "Whack",
+                  "No"
+                ]
+              },
+              {
+                "name": "Animations",
+                "description": "Flux options",
+                "type": "Boolean",
+                "value": false
+              },
+              {
+                "name": "Animations",
+                "description": "Swinging",
+                "type": "Boolean",
+                "value": "Vanilla",
+                "values": [
+                  "Vanilla",
+                  "Smooth"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "NoShield",
+            "description": "Don\u0027t render shields.",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "NoShield",
+                "description": "",
+                "type": "Boolean",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "BlockHighlight",
+        "Description": "Highlight the block you are looking at.",
+        "Settings": [
+          {
+            "name": "Red",
+            "description": "",
+            "type": "Number",
+            "value": 255,
+            "max": 255,
+            "min": 0
+          },
+          {
+            "name": "Green",
+            "description": "",
+            "type": "Number",
+            "value": 255,
+            "max": 255,
+            "min": 0
+          },
+          {
+            "name": "Blue",
+            "description": "",
+            "type": "Number",
+            "value": 255,
+            "max": 255,
+            "min": 0
+          },
+          {
+            "name": "Alpha",
+            "description": "",
+            "type": "Number",
+            "value": 0.7,
+            "max": 1.0,
+            "min": 0.0
+          },
+          {
+            "name": "Fill",
+            "description": "",
+            "type": "Boolean",
+            "value": false
+          }
+        ]
+      },
+      {
+        "Name": "Bob",
+        "Description": "Makes your camera bob when off ground.",
+        "Settings": []
+      },
+      {
+        "Name": "Breadcrumbs",
+        "Description": "Draws a line through where you\u0027ve been.",
+        "Settings": [
+          {
+            "name": "Time",
+            "description": "Time each crumb exists for, measured in units of 5 seconds.",
+            "type": "Number",
+            "value": 2,
+            "max": 40,
+            "min": 1
+          },
+          {
+            "name": "Distance",
+            "description": "Distance per crumb",
+            "type": "Number",
+            "value": 4.0,
+            "max": 20.0,
+            "min": 0.1
+          }
+        ]
+      },
+      {
+        "Name": "CSGOCrosshair",
+        "Description": "Custom crosshair like in CSGO",
+        "Settings": [
+          {
+            "name": "Width",
+            "description": "",
+            "type": "Number",
+            "value": 5.0,
+            "max": 15.0,
+            "min": 0.0
+          },
+          {
+            "name": "Height",
+            "description": "",
+            "type": "Number",
+            "value": 5.0,
+            "max": 15.0,
+            "min": 0.0
+          },
+          {
+            "name": "Red",
+            "description": "",
+            "type": "Number",
+            "value": 255.0,
+            "max": 255.0,
+            "min": 0.0
+          },
+          {
+            "name": "Green",
+            "description": "",
+            "type": "Number",
+            "value": 255.0,
+            "max": 255.0,
+            "min": 0.0
+          },
+          {
+            "name": "Blue",
+            "description": "",
+            "type": "Number",
+            "value": 255.0,
+            "max": 255.0,
+            "min": 0.0
+          },
+          {
+            "name": "Alpha",
+            "description": "",
+            "type": "Number",
+            "value": 255.0,
+            "max": 255.0,
+            "min": 0.0
+          },
+          {
+            "name": "Background",
+            "description": "",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Background",
+                "description": "",
+                "type": "Boolean",
+                "value": 255.0,
+                "max": 255.0,
+                "min": 0.0
+              },
+              {
+                "name": "Background",
+                "description": "",
+                "type": "Boolean",
+                "value": 255.0,
+                "max": 255.0,
+                "min": 0.0
+              },
+              {
+                "name": "Background",
+                "description": "",
+                "type": "Boolean",
+                "value": 255.0,
+                "max": 255.0,
+                "min": 0.0
+              },
+              {
+                "name": "Background",
+                "description": "",
+                "type": "Boolean",
+                "value": 255.0,
+                "max": 255.0,
+                "min": 0.0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "CameraClip",
+        "Description": "Makes your third person camera clip through walls.",
+        "Settings": [
+          {
+            "name": "Distance",
+            "description": "Change the camera position",
+            "type": "Number",
+            "value": 5.0,
+            "max": 15.0,
+            "min": 0.0
+          }
+        ]
+      },
+      {
+        "Name": "ChestESP",
+        "Description": "Makes you see chests through walls.",
+        "Settings": [
+          {
+            "name": "Chest",
+            "description": "Render chests",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Enderchest",
+            "description": "Render enderchests",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Shulker",
+            "description": "Render shulker boxes",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Furnace",
+            "description": "Render furnaces",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Misc",
+            "description": "Render misc (hoppers etc)",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "ItemFrames",
+            "description": "Render itemframes",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Fill",
+            "description": "Fill box",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "Alpha",
+            "description": "Opacity",
+            "type": "Number",
+            "value": 0.7,
+            "max": 1.0,
+            "min": 0.0
+          }
+        ]
+      },
+      {
+        "Name": "CustomSky",
+        "Description": "Give your world a custom sky",
+        "Settings": [
+          {
+            "name": "Red",
+            "description": "Red value",
+            "type": "Number",
+            "value": 215.0,
+            "max": 255.0,
+            "min": 0.0
+          },
+          {
+            "name": "Green",
+            "description": "Green value",
+            "type": "Number",
+            "value": 0.0,
+            "max": 255.0,
+            "min": 0.0
+          },
+          {
+            "name": "Blue",
+            "description": "Blue value",
+            "type": "Number",
+            "value": 250.0,
+            "max": 255.0,
+            "min": 0.0
+          },
+          {
+            "name": "Alpha",
+            "description": "Opacity",
+            "type": "Number",
+            "value": 255.0,
+            "max": 255.0,
+            "min": 0.0
+          }
+        ]
+      },
+      {
+        "Name": "Dinnerbone",
+        "Description": "Makes specified entities render upside down.",
+        "Settings": [
+          {
+            "name": "Rotation",
+            "description": "Degrees to rotate",
+            "type": "Number",
+            "value": 180.0,
+            "max": 360.0,
+            "min": 0.0
+          },
+          {
+            "name": "Mode",
+            "description": "Who to apply to",
+            "type": "Enum",
+            "value": "Quantum_users",
+            "values": [
+              "All",
+              "Quantum_users",
+              "Self"
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "ESP",
+        "Description": "Makes you see entities through walls.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "Mode to use",
+            "type": "Enum",
+            "value": "Csgo",
+            "values": [
+              "Glowing",
+              "Outline_box",
+              "Filled_box",
+              "Csgo"
+            ],
+            "subsettings": [
+              {
+                "name": "Mode",
+                "description": "currently broken.. enjoy! :)",
+                "type": "Enum",
+                "value": 0.7,
+                "max": 1.0,
+                "min": 0.0
+              }
+            ]
+          },
+          {
+            "name": "Players",
+            "description": "Render on players",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Players",
+                "description": "Render on self",
+                "type": "Boolean",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "Mobs",
+            "description": "Render on mobs",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Animals",
+            "description": "Render on animals",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Items",
+            "description": "Render on dropped items",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Misc",
+            "description": "EVERYTHING else",
+            "type": "Boolean",
+            "value": false
+          }
+        ]
+      },
+      {
+        "Name": "FreeLook",
+        "Description": "Makes your camera yaw move without your yaw changing.",
+        "Settings": [
+          {
+            "name": "TPP",
+            "description": "Force 3rd person perspective",
+            "type": "Boolean",
+            "value": false
+          }
+        ]
+      },
+      {
+        "Name": "Freecam",
+        "Description": "Makes your camera move freely.",
+        "Settings": [
+          {
+            "name": "Speed",
+            "description": "Speed to move at",
+            "type": "Number",
+            "value": 1.0,
+            "max": 10.0,
+            "min": 0.1
+          }
+        ]
+      },
+      {
+        "Name": "FullBright",
+        "Description": "Makes your game bright.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "Mode to use",
+            "type": "Enum",
+            "value": "Gamma",
+            "values": [
+              "Potion",
+              "Gamma",
+              "Fire"
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "HoleESP",
+        "Description": "Makes holes glow in the specified color.",
+        "Settings": [
+          {
+            "name": "Bedrock",
+            "description": "Render bedrock holes",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Bedrock",
+                "description": "Red value",
+                "type": "Boolean",
+                "value": 100.0,
+                "max": 255.0,
+                "min": 0.0
+              },
+              {
+                "name": "Bedrock",
+                "description": "Green value",
+                "type": "Boolean",
+                "value": 50.0,
+                "max": 255.0,
+                "min": 0.0
+              },
+              {
+                "name": "Bedrock",
+                "description": "Blue value",
+                "type": "Boolean",
+                "value": 50.0,
+                "max": 255.0,
+                "min": 0.0
+              }
+            ]
+          },
+          {
+            "name": "Obsidian",
+            "description": "Render obby holes",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Obsidian",
+                "description": "Red value",
+                "type": "Boolean",
+                "value": 100.0,
+                "max": 255.0,
+                "min": 0.0
+              },
+              {
+                "name": "Obsidian",
+                "description": "Green value",
+                "type": "Boolean",
+                "value": 50.0,
+                "max": 255.0,
+                "min": 0.0
+              },
+              {
+                "name": "Obsidian",
+                "description": "Blue value",
+                "type": "Boolean",
+                "value": 50.0,
+                "max": 255.0,
+                "min": 0.0
+              }
+            ]
+          },
+          {
+            "name": "Other",
+            "description": "Other hole types",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Other",
+                "description": "Red value",
+                "type": "Boolean",
+                "value": 100.0,
+                "max": 255.0,
+                "min": 0.0
+              },
+              {
+                "name": "Other",
+                "description": "Green value",
+                "type": "Boolean",
+                "value": 50.0,
+                "max": 255.0,
+                "min": 0.0
+              },
+              {
+                "name": "Other",
+                "description": "Blue value",
+                "type": "Boolean",
+                "value": 50.0,
+                "max": 255.0,
+                "min": 0.0
+              }
+            ]
+          },
+          {
+            "name": "Alpha",
+            "description": "Opacity",
+            "type": "Number",
+            "value": 0.7,
+            "max": 1.0,
+            "min": 0.0
+          }
+        ]
+      },
+      {
+        "Name": "ItemPhysics",
+        "Description": "Makes items fly.",
+        "Settings": []
+      },
+      {
+        "Name": "Nametags",
+        "Description": "Enhances nametags.",
+        "Settings": [
+          {
+            "name": "Items",
+            "description": "Render nametags on items.",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Distance",
+            "description": "Max distance to render nametag.",
+            "type": "Number",
+            "value": 8192.0,
+            "max": 32768.0,
+            "min": 4096.0
+          },
+          {
+            "name": "Gamemode",
+            "description": "Show what gamemode players are in.",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "ManualScale",
+            "description": "",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "ManualScale",
+                "description": "",
+                "type": "Boolean",
+                "value": 1.0,
+                "max": 10.0,
+                "min": 0.1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "NoCaveCulling",
+        "Description": "Makes caves not disappear when clipped.",
+        "Settings": []
+      },
+      {
+        "Name": "NoFog",
+        "Description": "Remove all fog from the game",
+        "Settings": []
+      },
+      {
+        "Name": "NoRender",
+        "Description": "Makes certain things not render.",
+        "Settings": [
+          {
+            "name": "Liquids",
+            "description": "Don\u0027t render liquid fog",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Fire",
+            "description": "Don\u0027t render fire",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Water",
+            "description": "Don\u0027t render water overlay",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "HurtCam",
+            "description": "Dont\u0027 render aimpunch",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Background",
+            "description": "Don\u0027t render background tint",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "BossBar",
+            "description": "Also stops status effect icons",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "LessItems",
+            "description": "Percentage of items to get rid of",
+            "type": "Number",
+            "value": 0.0,
+            "max": 100.0,
+            "min": 0.0
+          },
+          {
+            "name": "BlockBits",
+            "description": "Don\u0027t render block bits on break",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Snowballs",
+            "description": "Don\u0027t render snowballs",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "Wither",
+            "description": "Don\u0027t render withers",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "FallingBlocks",
+            "description": "Don\u0027t render falling blocks",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "CampfireSmoke",
+            "description": "Don\u0027t render campfire smoke",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "PortalOverlay",
+            "description": "Don\u0027t render portal overlay",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "EnchantingTableBook",
+            "description": "Don\u0027t render enchanting table book",
+            "type": "Boolean",
+            "value": false
+          }
+        ]
+      },
+      {
+        "Name": "Popbob",
+        "Description": "Makes everyone a certain infamous 2b2t dupe griefer.",
+        "Settings": [
+          {
+            "name": "PlayerNames",
+            "description": "Change the name of other players",
+            "type": "String",
+            "value": "Popbob"
+          },
+          {
+            "name": "Skin",
+            "description": "Change the skin of other players",
+            "type": "Enum",
+            "value": "Popbob",
+            "values": [
+              "Popbob",
+              "Steve"
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "RangeCircles",
+        "Description": "Draws circles bounding where other players and yourself can reach.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "",
+            "type": "Enum",
+            "value": "All",
+            "values": [
+              "Self",
+              "Others",
+              "All"
+            ]
+          },
+          {
+            "name": "Radius",
+            "description": "",
+            "type": "Number",
+            "value": 5.0,
+            "max": 10.0,
+            "min": 0.0
+          }
+        ]
+      },
+      {
+        "Name": "Search",
+        "Description": "Draws boxes around certain blocks.",
+        "Settings": [
+          {
+            "name": "Red",
+            "description": "Red value",
+            "type": "Number",
+            "value": 100.0,
+            "max": 255.0,
+            "min": 0.0
+          },
+          {
+            "name": "Green",
+            "description": "Green value",
+            "type": "Number",
+            "value": 50.0,
+            "max": 255.0,
+            "min": 0.0
+          },
+          {
+            "name": "Blue",
+            "description": "Blue value",
+            "type": "Number",
+            "value": 50.0,
+            "max": 255.0,
+            "min": 0.0
+          },
+          {
+            "name": "Alpha",
+            "description": "Opacity",
+            "type": "Number",
+            "value": 0.7,
+            "max": 1.0,
+            "min": 0.0
+          },
+          {
+            "name": "Box",
+            "description": "Draws box to blocks",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Tracer",
+            "description": "Draws tracer to blocks",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "Skeletons",
+        "Description": "Draws the skeletons of players.",
+        "Settings": [
+          {
+            "name": "ColourMode",
+            "description": "Mode to colour",
+            "type": "Enum",
+            "value": "Auto",
+            "values": [
+              "Custom",
+              "Auto"
+            ],
+            "subsettings": [
+              {
+                "name": "ColourMode",
+                "description": "Red value",
+                "type": "Enum",
+                "value": 0,
+                "max": 255,
+                "min": 0
+              },
+              {
+                "name": "ColourMode",
+                "description": "Green value",
+                "type": "Enum",
+                "value": 0,
+                "max": 255,
+                "min": 0
+              },
+              {
+                "name": "ColourMode",
+                "description": "Blue value",
+                "type": "Enum",
+                "value": 0,
+                "max": 255,
+                "min": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "Tracers",
+        "Description": "Draws tracers to certain entities.",
+        "Settings": [
+          {
+            "name": "Width",
+            "description": "Width of line",
+            "type": "Number",
+            "value": 1.0,
+            "max": 3.0,
+            "min": 0.1
+          },
+          {
+            "name": "Players",
+            "description": "Draw tracers to players",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Monsters",
+            "description": "Draw tracers to mobs",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Animals",
+            "description": "Draw tracers to animals",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Items",
+            "description": "Draw tracers to dropped items",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "Misc",
+            "description": "Everything else",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "Viewmodel",
+        "Description": "Makes items rendered in first person render in different spots with different scaling.",
+        "Settings": [
+          {
+            "name": "PosMainhand",
+            "description": "Change pos or not",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "PosMainhand",
+                "description": "Move x pos",
+                "type": "Boolean",
+                "value": 0.0,
+                "max": 3.0,
+                "min": -3.0
+              },
+              {
+                "name": "PosMainhand",
+                "description": "Move y pos",
+                "type": "Boolean",
+                "value": 0.0,
+                "max": 3.0,
+                "min": -3.0
+              },
+              {
+                "name": "PosMainhand",
+                "description": "Move z pos",
+                "type": "Boolean",
+                "value": 0.0,
+                "max": 3.0,
+                "min": -3.0
+              }
+            ]
+          },
+          {
+            "name": "PosOffhand",
+            "description": "Change pos or not",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "PosOffhand",
+                "description": "Move x pos",
+                "type": "Boolean",
+                "value": 0.0,
+                "max": 3.0,
+                "min": -3.0
+              },
+              {
+                "name": "PosOffhand",
+                "description": "Move y pos",
+                "type": "Boolean",
+                "value": 0.0,
+                "max": 3.0,
+                "min": -3.0
+              },
+              {
+                "name": "PosOffhand",
+                "description": "Move z pos",
+                "type": "Boolean",
+                "value": 0.0,
+                "max": 3.0,
+                "min": -3.0
+              }
+            ]
+          },
+          {
+            "name": "ScaleMainhand",
+            "description": "Change scale or not",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "ScaleMainhand",
+                "description": "Stretch x",
+                "type": "Boolean",
+                "value": 1.0,
+                "max": 3.0,
+                "min": -3.0
+              },
+              {
+                "name": "ScaleMainhand",
+                "description": "Stretch y",
+                "type": "Boolean",
+                "value": 1.0,
+                "max": 3.0,
+                "min": -3.0
+              },
+              {
+                "name": "ScaleMainhand",
+                "description": "Stretch z",
+                "type": "Boolean",
+                "value": 1.0,
+                "max": 3.0,
+                "min": -3.0
+              }
+            ]
+          },
+          {
+            "name": "ScaleOffhand",
+            "description": "Change scale or not",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "ScaleOffhand",
+                "description": "Stretch x",
+                "type": "Boolean",
+                "value": 1.0,
+                "max": 3.0,
+                "min": -3.0
+              },
+              {
+                "name": "ScaleOffhand",
+                "description": "Stretch y",
+                "type": "Boolean",
+                "value": 1.0,
+                "max": 3.0,
+                "min": -3.0
+              },
+              {
+                "name": "ScaleOffhand",
+                "description": "Stretch z",
+                "type": "Boolean",
+                "value": 1.0,
+                "max": 3.0,
+                "min": -3.0
+              }
+            ]
+          },
+          {
+            "name": "UseProgressMainhand",
+            "description": "Lock hand progress",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "UseProgressMainhand",
+                "description": "How far to adjust",
+                "type": "Boolean",
+                "value": 1.0,
+                "max": 1.0,
+                "min": 0.0
+              },
+              {
+                "name": "UseProgressMainhand",
+                "description": "How far to adjust when damaged",
+                "type": "Boolean",
+                "value": 1.0,
+                "max": 1.0,
+                "min": 0.0
+              }
+            ]
+          },
+          {
+            "name": "UseProgressOffhand",
+            "description": "Lock hand progress",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "UseProgressOffhand",
+                "description": "How far to adjust",
+                "type": "Boolean",
+                "value": 1.0,
+                "max": 1.0,
+                "min": 0.0
+              },
+              {
+                "name": "UseProgressOffhand",
+                "description": "How far to adjust when damaged",
+                "type": "Boolean",
+                "value": 1.0,
+                "max": 1.0,
+                "min": 0.0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "Xray",
+        "Description": "Makes blocks clear or draws boxes around the blocks you want.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "Mode to use",
+            "type": "Enum",
+            "value": "Classic",
+            "values": [
+              "Classic",
+              "Esp"
+            ],
+            "subsettings": [
+              {
+                "name": "Mode",
+                "description": "Show lava and water",
+                "type": "Enum",
+                "value": false
+              },
+              {
+                "name": "Mode",
+                "description": "Range to scan",
+                "type": "Enum",
+                "value": 15,
+                "max": 125,
+                "min": 0
+              },
+              {
+                "name": "Mode",
+                "description": "Delays of scans",
+                "type": "Enum",
+                "value": 5,
+                "max": 20,
+                "min": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "World": [
+      {
+        "Name": "AirInteract",
+        "Description": "Allows you to place blocks in the air.",
+        "Settings": [
+          {
+            "name": "Render",
+            "description": "Render where it will place (recommended)",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "AntiBot",
+        "Description": "Removes bots from your world.",
+        "Settings": [
+          {
+            "name": "Entry",
+            "description": "Removes players w/o a player entry in the Minecraft API.",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "GameMode",
+            "description": "Removes entities with a null gamemode.",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Invisibles",
+            "description": "Remove invisible bots.",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Null",
+            "description": "Remove if a NullPointerException occurs.",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Profile",
+            "description": "Removes players w/o a game profile.",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "AntiGhostBlocks",
+        "Description": "Attempts to punch ghostblocks",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "Mode to use.",
+            "type": "Enum",
+            "value": "Advanced",
+            "values": [
+              "Basic",
+              "Advanced"
+            ],
+            "subsettings": [
+              {
+                "name": "Mode",
+                "description": "Sync break",
+                "type": "Enum",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "AntiPacketKick",
+        "Description": "Attempts to cancel kick packets.",
+        "Settings": []
+      },
+      {
+        "Name": "AutoBuilder",
+        "Description": "Builds various structures automatically.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "Which thing to build",
+            "type": "Enum",
+            "value": "Highway",
+            "values": [
+              "Highway",
+              "Portal"
+            ]
+          },
+          {
+            "name": "BPT",
+            "description": "Blocks to place per tick",
+            "type": "Number",
+            "value": 2,
+            "max": 10,
+            "min": 1
+          }
+        ]
+      },
+      {
+        "Name": "AutoSponge",
+        "Description": "Automatically clears water.",
+        "Settings": [
+          {
+            "name": "Delay",
+            "description": "time to wait before placing",
+            "type": "Number",
+            "value": 1.0,
+            "max": 10.0,
+            "min": 0.0
+          },
+          {
+            "name": "bpt",
+            "description": "how many sponges to place per tick (10 works on ec)",
+            "type": "Number",
+            "value": 1.0,
+            "max": 10.0,
+            "min": 0.0
+          }
+        ]
+      },
+      {
+        "Name": "FastUse",
+        "Description": "Makes you use things fastly.",
+        "Settings": [
+          {
+            "name": "Only XP Bottles",
+            "description": "Only fast use XP Bottles",
+            "type": "Boolean",
+            "value": false
+          }
+        ]
+      },
+      {
+        "Name": "InventoryTweaks",
+        "Description": "Various tweaks to how the inventory works.",
+        "Settings": [
+          {
+            "name": "SecretClose",
+            "description": "XCarry and SecretClose (WILL cause desync)",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Move",
+            "description": "Move while in screen",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "Move",
+                "description": "",
+                "type": "Boolean",
+                "value": true
+              },
+              {
+                "name": "Move",
+                "description": "",
+                "type": "Boolean",
+                "value": true
+              },
+              {
+                "name": "Move",
+                "description": "",
+                "type": "Boolean",
+                "value": true
+              }
+            ]
+          },
+          {
+            "name": "AllGUIs",
+            "description": "Move in all GUIs",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "LookSpeed",
+            "description": "Look while in screen with arrow keys",
+            "type": "Number",
+            "value": 5.0,
+            "max": 10.0,
+            "min": 0.0
+          }
+        ]
+      },
+      {
+        "Name": "LiquidInteract",
+        "Description": "Allows you to interact with liquids.",
+        "Settings": []
+      },
+      {
+        "Name": "LiquidRemover",
+        "Description": "Places blocks in liquids to get rid of them.",
+        "Settings": [
+          {
+            "name": "bpt",
+            "description": "blocks to place per tick",
+            "type": "Number",
+            "value": 1.0,
+            "max": 10.0,
+            "min": 0.0
+          },
+          {
+            "name": "LavaOnly",
+            "description": "Only remove lava",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "NukerBypass",
+        "Description": "Nuker with various settings.",
+        "Settings": [
+          {
+            "name": "Blocks",
+            "description": "How many blocks to break",
+            "type": "Enum",
+            "value": "$2x3",
+            "values": [
+              "$1x3",
+              "$2x3",
+              "$3x3",
+              "Highway",
+              "Radius"
+            ],
+            "subsettings": [
+              {
+                "name": "Blocks",
+                "description": "Radius shape",
+                "type": "Enum",
+                "value": "Circle",
+                "values": [
+                  "Circle",
+                  "Square"
+                ]
+              },
+              {
+                "name": "Blocks",
+                "description": "Range for radius",
+                "type": "Enum",
+                "value": 4,
+                "max": 7,
+                "min": 1
+              },
+              {
+                "name": "Blocks",
+                "description": "Draws a flat box around you to visualize radius",
+                "type": "Enum",
+                "value": true
+              }
+            ]
+          },
+          {
+            "name": "KeepY",
+            "description": "Keep Y",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "Tracer",
+            "description": "Draws tracer to current block",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "PauseWhileEating",
+            "description": "Pause while eating",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "TickDelay",
+            "description": "Amount of ticks to wait per block set break",
+            "type": "Number",
+            "value": 1,
+            "max": 15,
+            "min": 0
+          },
+          {
+            "name": "SyncSlot",
+            "description": "Syncs slot using a packet before breaking block",
+            "type": "Boolean",
+            "value": false
+          }
+        ]
+      },
+      {
+        "Name": "Scaffold",
+        "Description": "Scaffolds blocks under you.",
+        "Settings": [
+          {
+            "name": "Event",
+            "description": "Mode to use (tick does not rotate properly!)",
+            "type": "Enum",
+            "value": "Move",
+            "values": [
+              "Tick",
+              "Move"
+            ]
+          },
+          {
+            "name": "SafeWalk",
+            "description": "Enable SafeWalk if no already enabled",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "Extend",
+            "description": "Extend scaffold",
+            "type": "Number",
+            "value": 3,
+            "max": 6,
+            "min": 1
+          },
+          {
+            "name": "Downwards",
+            "description": "Makes scaffold go down when you are sneaking",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "AlwaysRotate",
+            "description": "Always client rotate",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "KeepY",
+            "description": "Keep Y when jumping",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "Legacy",
+            "description": "Legacy placing",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "BlocksLeftHUD",
+            "description": "Lets you know how many blocks you have left on HUD",
+            "type": "Boolean",
+            "value": false,
+            "subsettings": [
+              {
+                "name": "BlocksLeftHUD",
+                "description": "The x of the HUD.",
+                "type": "Boolean",
+                "value": 0,
+                "max": 1920,
+                "min": -1920
+              },
+              {
+                "name": "BlocksLeftHUD",
+                "description": "The y of the HUD.",
+                "type": "Boolean",
+                "value": 0,
+                "max": 1080,
+                "min": -1080
+              },
+              {
+                "name": "BlocksLeftHUD",
+                "description": "Render item next to text",
+                "type": "Boolean",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "SpoofWeather",
+        "Description": "Spoofs the current world\u0027s weather.",
+        "Settings": [
+          {
+            "name": "Mode",
+            "description": "Type of weather to set",
+            "type": "Enum",
+            "value": "Clear",
+            "values": [
+              "Clear",
+              "Rain",
+              "Thunder"
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "Time",
+        "Description": "Changes the world\u0027s time.",
+        "Settings": [
+          {
+            "name": "Time",
+            "description": "set day or night",
+            "type": "Enum",
+            "value": "Night",
+            "values": [
+              "Day",
+              "Night"
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "Timer",
+        "Description": "Speeds up your game.",
+        "Settings": [
+          {
+            "name": "Speed",
+            "description": "Multiplier",
+            "type": "Number",
+            "value": 1.3,
+            "max": 10.0,
+            "min": 0.0
+          }
+        ]
+      }
+    ],
+    "Client": [
+      {
+        "Name": "Baritone",
+        "Description": "Control baritone with this module.",
+        "Settings": [
+          {
+            "name": "Place",
+            "description": "Can baritone place blocks",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Break",
+            "description": "Can baritone break place",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "WaterBucket",
+            "description": "Use Water Bucket when falling",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Water",
+            "description": "Walk On Water",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Lava",
+            "description": "Walk On Lava",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "BackFill",
+            "description": "Fill in what we have mined",
+            "type": "Boolean",
+            "value": false
+          }
+        ]
+      },
+      {
+        "Name": "Client",
+        "Description": "This holds the settings for the whole client.",
+        "Settings": [
+          {
+            "name": "Name",
+            "description": "Change the name of the client",
+            "type": "String",
+            "value": "Quantum"
+          },
+          {
+            "name": "Baritone",
+            "description": "should we have baritone integration",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "ToggleMSG",
+            "description": "alert when things are toggled",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Friends",
+            "description": "Uses friends",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "World",
+            "description": "Settings for the whole client",
+            "type": "Boolean",
+            "value": false,
+            "subsettings": [
+              {
+                "name": "World",
+                "description": "Rotation method",
+                "type": "Boolean",
+                "value": "None",
+                "values": [
+                  "None",
+                  "Packet",
+                  "Legit"
+                ]
+              },
+              {
+                "name": "World",
+                "description": "Should we swing after placing a block",
+                "type": "Boolean",
+                "value": true
+              },
+              {
+                "name": "World",
+                "description": "can we place in the air",
+                "type": "Boolean",
+                "value": true
+              }
+            ]
+          },
+          {
+            "name": "Capes",
+            "description": "Show your Quantum cape or not",
+            "type": "Enum",
+            "value": "All_users",
+            "values": [
+              "All_users",
+              "Other_users"
+            ]
+          },
+          {
+            "name": "CustomFont",
+            "description": "Restart client after toggling",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "CustomFont",
+                "description": "Doesn\u0027t require restart",
+                "type": "Boolean",
+                "value": "Sfr",
+                "values": [
+                  "Sfr",
+                  "Seg",
+                  "Con",
+                  "Sfrm",
+                  "Verdana"
+                ]
+              },
+              {
+                "name": "CustomFont",
+                "description": "Doesn\u0027t require restart",
+                "type": "Boolean",
+                "value": 18,
+                "max": 22,
+                "min": 16
+              },
+              {
+                "name": "CustomFont",
+                "description": "Doesn\u0027t require restart",
+                "type": "Boolean",
+                "value": 0,
+                "max": 6,
+                "min": -6
+              }
+            ]
+          },
+          {
+            "name": "RainbowMode",
+            "description": "Change the colors",
+            "type": "Enum",
+            "value": "Normal",
+            "values": [
+              "Keep_hue",
+              "Normal",
+              "Custom"
+            ]
+          },
+          {
+            "name": "RainbowOffset",
+            "description": "Change the colors",
+            "type": "Number",
+            "value": 360,
+            "max": 360,
+            "min": 1
+          },
+          {
+            "name": "RainbowWidth",
+            "description": "Change the colors",
+            "type": "Number",
+            "value": 360,
+            "max": 360,
+            "min": 1
+          },
+          {
+            "name": "RainbowSlowness",
+            "description": "Change the colors",
+            "type": "Number",
+            "value": 10,
+            "max": 20,
+            "min": 1
+          },
+          {
+            "name": "SplashScreen",
+            "description": "Replace vanilla splash screen",
+            "type": "Boolean",
+            "value": true,
+            "subsettings": [
+              {
+                "name": "SplashScreen",
+                "description": "Splash Screen mode.",
+                "type": "Boolean",
+                "value": "Quantum",
+                "values": [
+                  "Quantum",
+                  "Legacy"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Performance",
+            "description": "Full performance mode. Gui/Hud shadows are completely disabled.",
+            "type": "Boolean",
+            "value": false
+          }
+        ]
+      },
+      {
+        "Name": "DiscordRPC",
+        "Description": "Adds rich presence with either custom strings or current activity.",
+        "Settings": [
+          {
+            "name": "Ghost",
+            "description": "Use a diffrent rpc so it looks like you are on vanilla",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "StatusMode",
+            "description": "Mode to use",
+            "type": "Enum",
+            "value": "Username",
+            "values": [
+              "Username",
+              "String"
+            ],
+            "subsettings": [
+              {
+                "name": "StatusMode",
+                "description": "Status message",
+                "type": "Enum",
+                "value": "quantum is cool!!!"
+              }
+            ]
+          },
+          {
+            "name": "DetailMode",
+            "description": "DetailMode to use",
+            "type": "Enum",
+            "value": "Server_ip",
+            "values": [
+              "Server_ip",
+              "Dynamic",
+              "String"
+            ],
+            "subsettings": [
+              {
+                "name": "DetailMode",
+                "description": "Detail message",
+                "type": "Enum",
+                "value": "discord.gg/h8EQyuYTK7"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "HUD",
+        "Description": "Control your head\u0027s up display.",
+        "Settings": [
+          {
+            "name": "MiddleAlign",
+            "description": "Draws a small line in the middle of the component and the editor screen",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Legacy",
+            "description": "Locks some components in place, like in old Quantum",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "Color",
+            "description": "TextColour",
+            "type": "Enum",
+            "value": "White",
+            "values": [
+              "White",
+              "Constantiam",
+              "Rainbow"
+            ]
+          },
+          {
+            "name": "Bold",
+            "description": "Bold font (this is going to be deprecated at some point",
+            "type": "Boolean",
+            "value": false
+          },
+          {
+            "name": "Animate",
+            "description": "Animate some components",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "MusicPlayer",
+        "Description": "Play an mp3 file by pointing it to the file\u0027s directory.",
+        "Settings": [
+          {
+            "name": "FilePath",
+            "description": "Path to the music file",
+            "type": "String",
+            "value": "C:\\Music\\Fitmc.wav"
+          }
+        ]
+      },
+      {
+        "Name": "NewGui",
+        "Description": "The ClickGUI based on the new architecture.",
+        "Settings": [
+          {
+            "name": "Theme",
+            "description": "Theme to use",
+            "type": "Enum",
+            "value": "Light",
+            "values": [
+              "Dark",
+              "Light",
+              "Rusher_hack",
+              "Mizu",
+              "Skeet",
+              "Sky",
+              "Quantum"
+            ],
+            "subsettings": [
+              {
+                "name": "Theme",
+                "description": "",
+                "type": "Enum",
+                "value": "Green",
+                "values": [
+                  "Green",
+                  "Red",
+                  "Blue",
+                  "Yellow",
+                  "Magenta",
+                  "Cyan",
+                  "Day_night",
+                  "Rainbow"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Background",
+            "description": "Background",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Blur",
+            "description": "Blur the background",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Flash",
+            "description": "Flash buttons",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Snow",
+            "description": "Let it snow...",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Name",
+            "description": "Render client name in corner",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Animate",
+            "description": "Animate stuff",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Tooltips",
+            "description": "Gives a description about stuff",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "Notifications",
+        "Description": "Client notifications, in chat, in desktop, and in game.",
+        "Settings": [
+          {
+            "name": "Chat",
+            "description": "Notify in chat",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Notification",
+            "description": "Notify in client",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Desktop",
+            "description": "Notify in desktop",
+            "type": "Boolean",
+            "value": true
+          }
+        ]
+      },
+      {
+        "Name": "OldGui",
+        "Description": "The ClickGUI based on the old architecture.",
+        "Settings": [
+          {
+            "name": "Theme",
+            "description": "Theme to use",
+            "type": "Enum",
+            "value": "Chiquitav2",
+            "values": [
+              "Chiquitav2",
+              "R333mo",
+              "Xp_beta",
+              "Chiqtav2"
+            ],
+            "subsettings": [
+              {
+                "name": "Theme",
+                "description": "White background, what can I say?",
+                "type": "Enum",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "Sort",
+            "description": "Alphabetical or STL",
+            "type": "Enum",
+            "value": "Alphabetical",
+            "values": [
+              "Alphabetical",
+              "Short_to_long"
+            ]
+          },
+          {
+            "name": "Background",
+            "description": "Background",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Blur",
+            "description": "",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Haiku",
+            "description": "Titlebar is a tiny bit shorter",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "Tooltips",
+            "description": "Render tooltips when hovering mouse over settings",
+            "type": "Boolean",
+            "value": true
+          },
+          {
+            "name": "OldChrome",
+            "description": "Titlebar looks like old chrome tabs",
+            "type": "Boolean",
+            "value": false
+          }
+        ]
+      },
+      {
+        "Name": "Qgeos",
+        "Description": "Quantum\u0027s Graphical Environment Operating System",
+        "Settings": []
+      }
+    ]
+  },
+  "Commands": [
+    {
+      "Name": "t",
+      "Description": "Toggle a module"
+    },
+    {
+      "Name": "drop",
+      "Description": ""
+    },
+    {
+      "Name": "relog",
+      "Description": "leave and join back to the server you are on"
+    },
+    {
+      "Name": "vclip",
+      "Description": ""
+    },
+    {
+      "Name": "peek",
+      "Description": "Peek inside of a shulker box"
+    },
+    {
+      "Name": "hidden",
+      "Description": "Sets a module to be hidden or not"
+    },
+    {
+      "Name": "fakeplayer",
+      "Description": ""
+    },
+    {
+      "Name": "search",
+      "Description": ""
+    },
+    {
+      "Name": "prefix",
+      "Description": ""
+    },
+    {
+      "Name": "name",
+      "Description": "Change the name of this client"
+    },
+    {
+      "Name": "spammer",
+      "Description": ""
+    },
+    {
+      "Name": "friend",
+      "Description": ""
+    },
+    {
+      "Name": "xray",
+      "Description": ""
+    },
+    {
+      "Name": "fov",
+      "Description": "Change you FOV beyond the default limits."
+    },
+    {
+      "Name": "quit",
+      "Description": "Closes the game"
+    },
+    {
+      "Name": "load",
+      "Description": "Load config from a foldername"
+    },
+    {
+      "Name": "panic",
+      "Description": "Disable all modules"
+    },
+    {
+      "Name": "gui",
+      "Description": ""
+    },
+    {
+      "Name": "message",
+      "Description": "Sends a message, useful for QuantumCrypt"
+    },
+    {
+      "Name": "invmanagerbl",
+      "Description": "Adds this string to the item name blacklist"
+    },
+    {
+      "Name": "save",
+      "Description": "Save your config to a folder"
+    },
+    {
+      "Name": "reload",
+      "Description": "Reload config"
+    },
+    {
+      "Name": "help",
+      "Description": "Lists the commands"
+    },
+    {
+      "Name": "namemc",
+      "Description": "Open the NameMC page of a username."
+    },
+    {
+      "Name": "bind",
+      "Description": "bind a module"
+    },
+    {
+      "Name": "bleachFlood",
+      "Description": "Interact with bleach\u0027s api"
+    },
+    {
+      "Name": "cleanchat",
+      "Description": "Add or remove bad words"
+    },
+    {
+      "Name": "enderchest",
+      "Description": "Peek inside of your cached ender chest"
+    },
+    {
+      "Name": "disconnect",
+      "Description": "Disconnect from server"
+    },
+    {
+      "Name": "yaw",
+      "Description": "Change you FOV beyond the default limits."
+    }
+  ],
+  "HUDItems": [
+    {
+      "Name": "ActiveModules",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Forgehax",
+          "description": "\u003emfw",
+          "type": "Boolean",
+          "value": false
+        },
+        {
+          "name": "Rainbow",
+          "description": "",
+          "type": "Enum",
+          "value": "Rainbow",
+          "values": [
+            "Rainbow",
+            "Lgbt",
+            "Auto"
+          ],
+          "subsettings": [
+            {
+              "name": "Rainbow",
+              "description": "Colors for lgbt mode",
+              "type": "Enum",
+              "value": "Femboy",
+              "values": [
+                "Trans",
+                "Femboy",
+                "Test"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Bold",
+          "description": "",
+          "type": "Boolean",
+          "value": false
+        },
+        {
+          "name": "Brackets",
+          "description": "",
+          "type": "Boolean",
+          "value": true
+        },
+        {
+          "name": "FastRainbow",
+          "description": "",
+          "type": "Boolean",
+          "value": true
+        },
+        {
+          "name": "InfoLeft",
+          "description": "Info on left",
+          "type": "Boolean",
+          "value": false
+        },
+        {
+          "name": "AnimationLength",
+          "description": "AnimationLength",
+          "type": "Number",
+          "value": 5,
+          "max": 20,
+          "min": 2
+        },
+        {
+          "name": "Line",
+          "description": "Line",
+          "type": "Boolean",
+          "value": false
+        },
+        {
+          "name": "Rect",
+          "description": "Draws a rectangle",
+          "type": "Boolean",
+          "value": false
+        }
+      ]
+    },
+    {
+      "Name": "Armor",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Percentage",
+          "description": "",
+          "type": "Boolean",
+          "value": true
+        },
+        {
+          "name": "Legacy",
+          "description": "",
+          "type": "Boolean",
+          "value": true
+        }
+      ]
+    },
+    {
+      "Name": "Arrows",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Radius",
+          "description": "",
+          "type": "Number",
+          "value": 15,
+          "max": 50,
+          "min": 1
+        },
+        {
+          "name": "ArrowRadius",
+          "description": "",
+          "type": "Number",
+          "value": 3,
+          "max": 10,
+          "min": 1
+        },
+        {
+          "name": "Shadow",
+          "description": "",
+          "type": "Boolean",
+          "value": true
+        },
+        {
+          "name": "Colour",
+          "description": "Colour of arrows",
+          "type": "Enum",
+          "value": "Rainbow",
+          "values": [
+            "Rainbow",
+            "Auto"
+          ]
+        },
+        {
+          "name": "OnlyPlayers",
+          "description": "",
+          "type": "Boolean",
+          "value": true
+        }
+      ]
+    },
+    {
+      "Name": "AverageSpeed",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "TicksPerSample",
+          "description": "This is also how many seconds it takes to update",
+          "type": "Number",
+          "value": 5,
+          "max": 30,
+          "min": 1
+        },
+        {
+          "name": "Mode",
+          "description": "Strat to use to calculate the average speed",
+          "type": "Enum",
+          "value": "Partial",
+          "values": [
+            "Value",
+            "Partial",
+            "Full"
+          ]
+        },
+        {
+          "name": "Line",
+          "description": "Line",
+          "type": "Boolean",
+          "value": false
+        }
+      ]
+    },
+    {
+      "Name": "Beds",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "TextMode",
+          "description": "",
+          "type": "Boolean",
+          "value": false
+        }
+      ]
+    },
+    {
+      "Name": "Chests",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "TextMode",
+          "description": "",
+          "type": "Boolean",
+          "value": false
+        }
+      ]
+    },
+    {
+      "Name": "Coordinates",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Line",
+          "description": "Line",
+          "type": "Boolean",
+          "value": false
+        }
+      ]
+    },
+    {
+      "Name": "Crystals",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "TextMode",
+          "description": "",
+          "type": "Boolean",
+          "value": false
+        }
+      ]
+    },
+    {
+      "Name": "Durability",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Line",
+          "description": "Line",
+          "type": "Boolean",
+          "value": false
+        }
+      ]
+    },
+    {
+      "Name": "FPS",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Line",
+          "description": "Line",
+          "type": "Boolean",
+          "value": false
+        }
+      ]
+    },
+    {
+      "Name": "Facing",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Line",
+          "description": "Line",
+          "type": "Boolean",
+          "value": false
+        },
+        {
+          "name": "Pitch",
+          "description": "Pitch",
+          "type": "Boolean",
+          "value": false
+        }
+      ]
+    },
+    {
+      "Name": "Hunger",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Line",
+          "description": "Line",
+          "type": "Boolean",
+          "value": false
+        }
+      ]
+    },
+    {
+      "Name": "Inventory",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Modern",
+          "description": "Modern-style inventoryhud",
+          "type": "Boolean",
+          "value": false
+        },
+        {
+          "name": "Clear",
+          "description": "",
+          "type": "Boolean",
+          "value": true
+        }
+      ]
+    },
+    {
+      "Name": "MemUsage",
+      "Description": "",
+      "Settings": []
+    },
+    {
+      "Name": "Notifications",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Theme",
+          "description": "New theme",
+          "type": "Enum",
+          "value": "Modern",
+          "values": [
+            "Modern",
+            "Legacy",
+            "Flux"
+          ]
+        },
+        {
+          "name": "FadeTimer",
+          "description": "",
+          "type": "Number",
+          "value": 50,
+          "max": 250,
+          "min": 1
+        },
+        {
+          "name": "MoveDownTimer",
+          "description": "",
+          "type": "Number",
+          "value": 5,
+          "max": 25,
+          "min": 1
+        },
+        {
+          "name": "MaxShown",
+          "description": "",
+          "type": "Number",
+          "value": 5,
+          "max": 15,
+          "min": 1
+        },
+        {
+          "name": "Bounce",
+          "description": "",
+          "type": "Boolean",
+          "value": true
+        },
+        {
+          "name": "BounceTimer",
+          "description": "",
+          "type": "Number",
+          "value": 25,
+          "max": 50,
+          "min": 1
+        },
+        {
+          "name": "DownWait",
+          "description": "",
+          "type": "Number",
+          "value": 25,
+          "max": 100,
+          "min": 1
+        },
+        {
+          "name": "BaseTime",
+          "description": "",
+          "type": "Number",
+          "value": 200,
+          "max": 1000,
+          "min": 100
+        }
+      ]
+    },
+    {
+      "Name": "Pickaxes",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Line",
+          "description": "Line",
+          "type": "Boolean",
+          "value": false
+        },
+        {
+          "name": "TextMode",
+          "description": "",
+          "type": "Boolean",
+          "value": false
+        }
+      ]
+    },
+    {
+      "Name": "Ping",
+      "Description": "",
+      "Settings": []
+    },
+    {
+      "Name": "PlayerCount",
+      "Description": "",
+      "Settings": []
+    },
+    {
+      "Name": "PlayerModel",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Scale",
+          "description": "",
+          "type": "Number",
+          "value": 50.0,
+          "max": 100.0,
+          "min": 5.0
+        },
+        {
+          "name": "LockYaw",
+          "description": "",
+          "type": "Boolean",
+          "value": false
+        },
+        {
+          "name": "LockPitch",
+          "description": "",
+          "type": "Boolean",
+          "value": false
+        }
+      ]
+    },
+    {
+      "Name": "PlayerRadar",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Color",
+          "description": "",
+          "type": "Enum",
+          "value": "White",
+          "values": [
+            "White",
+            "Constantiam",
+            "Rainbow"
+          ]
+        },
+        {
+          "name": "Bold",
+          "description": "",
+          "type": "Boolean",
+          "value": false
+        }
+      ]
+    },
+    {
+      "Name": "PlayerSpeed",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Line",
+          "description": "Line",
+          "type": "Boolean",
+          "value": false
+        },
+        {
+          "name": "Unit",
+          "description": "Unit of measurement.",
+          "type": "Enum",
+          "value": "Bps",
+          "values": [
+            "Bps",
+            "Kmh"
+          ]
+        },
+        {
+          "name": "RightJustify",
+          "description": "justify to the right",
+          "type": "Boolean",
+          "value": false
+        }
+      ]
+    },
+    {
+      "Name": "Saturation",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Line",
+          "description": "Line",
+          "type": "Boolean",
+          "value": false
+        }
+      ]
+    },
+    {
+      "Name": "Server",
+      "Description": "",
+      "Settings": []
+    },
+    {
+      "Name": "ServerBrand",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Line",
+          "description": "Line",
+          "type": "Boolean",
+          "value": false
+        }
+      ]
+    },
+    {
+      "Name": "ServerNotResponding",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Time",
+          "description": "time in ms that server has to lag for",
+          "type": "Number",
+          "value": 100,
+          "max": 1000,
+          "min": 0
+        }
+      ]
+    },
+    {
+      "Name": "SessionInfo",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Broken",
+          "description": "",
+          "type": "Boolean",
+          "value": true
+        },
+        {
+          "name": "Placed",
+          "description": "",
+          "type": "Boolean",
+          "value": true
+        },
+        {
+          "name": "Time",
+          "description": "",
+          "type": "Boolean",
+          "value": true
+        },
+        {
+          "name": "Distance",
+          "description": "",
+          "type": "Boolean",
+          "value": true
+        },
+        {
+          "name": "Kills",
+          "description": "",
+          "type": "Boolean",
+          "value": true
+        },
+        {
+          "name": "Deaths",
+          "description": "",
+          "type": "Boolean",
+          "value": true
+        }
+      ]
+    },
+    {
+      "Name": "SpeedGraph",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Mode",
+          "description": "Mode to use.",
+          "type": "Enum",
+          "value": "Dynamic",
+          "values": [
+            "Follow",
+            "Dynamic",
+            "Static"
+          ]
+        },
+        {
+          "name": "LineWidth",
+          "description": "",
+          "type": "Number",
+          "value": 0.75,
+          "max": 1.66,
+          "min": 0.01
+        },
+        {
+          "name": "StaticScale",
+          "description": "",
+          "type": "Number",
+          "value": 60,
+          "max": 250,
+          "min": 1
+        }
+      ]
+    },
+    {
+      "Name": "StatusEffects",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "RightJustify",
+          "description": "",
+          "type": "Boolean",
+          "value": false
+        }
+      ]
+    },
+    {
+      "Name": "TPS",
+      "Description": "",
+      "Settings": []
+    },
+    {
+      "Name": "Target",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Style",
+          "description": "",
+          "type": "Enum",
+          "value": "Mac_hack",
+          "values": [
+            "Mac_hack",
+            "Quantum"
+          ]
+        },
+        {
+          "name": "Mode",
+          "description": "Where to get the target from",
+          "type": "Enum",
+          "value": "Closest",
+          "values": [
+            "Closest",
+            "Last_damaged",
+            "Aura"
+          ]
+        },
+        {
+          "name": "TargetTime",
+          "description": "Amount of time before the target expires.",
+          "type": "Number",
+          "value": 7,
+          "max": 10,
+          "min": 1
+        }
+      ]
+    },
+    {
+      "Name": "Time",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Format",
+          "description": "Uses SimpleDateFormat, google it.",
+          "type": "String",
+          "value": "HH:mm:ss"
+        }
+      ]
+    },
+    {
+      "Name": "TooltipRender",
+      "Description": "",
+      "Settings": []
+    },
+    {
+      "Name": "Totems",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "TextMode",
+          "description": "",
+          "type": "Boolean",
+          "value": false
+        }
+      ]
+    },
+    {
+      "Name": "Watermark",
+      "Description": "",
+      "Settings": [
+        {
+          "name": "Line",
+          "description": "Line",
+          "type": "Boolean",
+          "value": false
+        },
+        {
+          "name": "Mode",
+          "description": "What mode to render the watermark in.",
+          "type": "Enum",
+          "value": "Plain",
+          "values": [
+            "First_letter",
+            "Quantum",
+            "Plain"
+          ]
+        },
+        {
+          "name": "Style",
+          "description": "Capatalise first character or not.",
+          "type": "Enum",
+          "value": "Upper_case",
+          "values": [
+            "Upper_case",
+            "Lower_case"
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Welcome",
+      "Description": "",
+      "Settings": []
+    }
+  ]
+}

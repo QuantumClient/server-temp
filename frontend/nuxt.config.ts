@@ -33,8 +33,6 @@ export default <NuxtConfig>{
     ]
   },
 
-  modern: true,
-
   loading: {
     color: '#565AA6',
     height: '8px'
