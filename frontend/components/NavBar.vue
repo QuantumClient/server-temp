@@ -108,7 +108,7 @@
             <NuxtLink to="/auth/Login" @click="isOpen = false" class="my-8 w-full text-center font-semibold cta inline-block bg-bluh hover:bg-bluh-600  px-3 py-2 rounded text-white">Login</NuxtLink>
           </li>
           <li v-else>
-            <a @click="$auth.logout(); isOpen = false" class="my-8 w-full text-center font-semibold cta inline-block bg-bluh hover:bg-bluh-600  px-3 py-2 rounded text-white">Login</a>
+            <a @click="$auth.logout(); isOpen = false" class="my-8 w-full text-center font-semibold cta inline-block bg-bluh hover:bg-bluh-600  px-3 py-2 rounded text-white">Logout</a>
           </li>
         </ul>
 

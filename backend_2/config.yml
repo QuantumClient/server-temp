@@ -1,0 +1,22 @@
+server:
+    host: localhost
+    port: "8080"
+database:
+    host: localhost
+    port: "3306"
+    user: root
+    password: ""
+    name: db
+log:
+    json: false
+    info_file: ./logs/info.log
+    error_file: ./logs/error.log
+auth:
+    access_token_secret:
+    refresh_token_secret:
+discord:
+    token:
+    prefix: '!'
+    guild_id: "715595968750105856"
+    log_channel_id: 788480949264056340
+    mute_role_id: 787585351836499988

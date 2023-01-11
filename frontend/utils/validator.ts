@@ -8,4 +8,5 @@ export default {
   passwordMatch: (pass: string, v: string) => {
     return (!v || v === pass) || 'Repeat Password does not match Password.'
   },
+  required: (v: string) => !!v || 'This field is required',
 }

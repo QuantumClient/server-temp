@@ -72,7 +72,7 @@ func DeleteCape(w http.ResponseWriter, r *http.Request) {
 	response, err := controllers.DeleteCape(uuidD)
 
 	if err != nil {
-		util.ErrorResponse(w, r, "Bad UUID")
+		util.ErrorResponse(w, r, "Bad Uuid")
 		return
 	}
 	log.Println(token.Claims.(*controllers.JwtCustomClaims).Username + "/" + token.Claims.(*controllers.JwtCustomClaims).Uuid + " has deleted cape " + uuidD.String())

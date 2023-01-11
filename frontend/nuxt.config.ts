@@ -33,6 +33,8 @@ export default <NuxtConfig>{
     ]
   },
 
+  modern: true,
+
   loading: {
     color: '#565AA6',
     height: '8px'
@@ -67,9 +69,12 @@ export default <NuxtConfig>{
   ],
 
   axios: {
-    // extra config e.g
     timeout: 1500,
     proxy: true
+  },
+
+  proxy: {
+    '/api': process.env.API_URL
   },
 
   auth: {

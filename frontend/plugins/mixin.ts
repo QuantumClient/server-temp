@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import { Plugin } from '@nuxt/types'
-import vaildator from "~/utils/validator";
+import validator from "~/utils/validator";
 
-Vue.prototype.$validator = vaildator;
+Vue.prototype.$validator = validator;
 
 declare module '@nuxt/types' {
   interface NuxtAppOptions {

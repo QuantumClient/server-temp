@@ -9,6 +9,7 @@ module.exports = {
       accent: '#437373',
       bluh: '#565AA6',
       colors,
+      transparent: 'transparent',
     },
     fontFamily: {
       'sans': ['Tahoma', 'system-ui']

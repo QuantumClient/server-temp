@@ -26,7 +26,7 @@ func GetPerms(w http.ResponseWriter, r *http.Request) {
 	uuidD := mux.Vars(r)["uuid"]
 
 	if !util.IsUUID(uuidD) {
-		util.ErrorResponse(w, r, "Bad UUID")
+		util.ErrorResponse(w, r, "Bad Uuid")
 		return
 	}
 
@@ -85,7 +85,7 @@ func CanRunLeg(w http.ResponseWriter, r *http.Request) {
 	uuidD := mux.Vars(r)["uuid"]
 
 	if !util.IsUUID(uuidD) {
-		util.ErrorResponse(w, r, "Bad UUID")
+		util.ErrorResponse(w, r, "Bad Uuid")
 		return
 	}
 
