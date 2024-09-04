@@ -17,6 +17,6 @@ FROM alpine:latest
 WORKDIR /app/backend/
 
 COPY --from=builder /app/backend/backend .
-COPY --from=builder /app/backend/.env .
+#COPY --from=builder /app/backend/.env .
 
 CMD ["./backend"]

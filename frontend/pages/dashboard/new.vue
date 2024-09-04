@@ -26,6 +26,7 @@ import Download from "~/components/dashboard/download.vue";
 import Project from "~/components/dashboard/project.vue";
 import authMiddleware from "~/middleware/auth";
 import Capes from "~/components/dashboard/Capes.vue";
+import validator from "~/utils/validator";
 
 export default Vue.extend({
   name: "new",
@@ -39,7 +40,7 @@ export default Vue.extend({
   },
   methods: {
     updateUsername() {
-      if (this.$validator.username(this.newUsername)) {
+      if (validator.username(this.newUsername)) {
 
       }
       console.log(this.newUsername)

@@ -3,14 +3,14 @@ package main
 import (
 	"backend/db"
 	"backend/routers"
-	"github.com/joho/godotenv"
+// 	"github.com/joho/godotenv"
 	"log"
 	"net/http"
 	"os"
 )
 
 func main() {
-	godotenv.Load()
+// 	godotenv.Load()
 
 	logfile, err := os.OpenFile("backend.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {
